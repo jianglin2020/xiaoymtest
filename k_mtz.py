@@ -11,7 +11,7 @@ import subprocess
 import importlib
 
 # 格式化token
-# import mtz_token
+import mtz_token
 
 from dotenv import load_dotenv
 # 加载环境变量
