@@ -1,3 +1,4 @@
+import send2trash
 import pyperclip
 
 def filter_and_convert_to_unique_string_with_numbering(input_file, keyword):
@@ -22,6 +23,15 @@ def filter_and_convert_to_unique_string_with_numbering(input_file, keyword):
         file.write(f'mtzv2ck="{result_string}"\n')  # 添加换行符以保持文件格式
 
     print(f"已复制到剪贴板，并追加到 {output_file}")
+
+    ## 将桌面文件移动到回收站    
+    try:
+        send2trash.send2trash(input_file)
+        print("文件已移动到回收站")
+    except FileNotFoundError:
+        print("文件不存在")
+    except Exception as e:
+        print("移动文件到回收站时出现错误:", e)
     
     return result_string
 
