@@ -2,13 +2,20 @@
 
 """
 先运行脚本，有问题再到群里问 https://t.me/xiaoymgroup
-new Env('鱼儿');
+new Env('每天赚');
 """
 import platform
 import sys
 import os
 import subprocess
 import importlib
+
+# 格式化token
+# import mtz_token
+
+# from dotenv import load_dotenv
+# # 加载环境变量
+# load_dotenv(dotenv_path='.env.local', verbose=True)
 
 def check_environment(file_name):
     python_info, os_info, cpu_info = sys.version_info, platform.system().lower(), platform.machine().lower()
@@ -71,9 +78,10 @@ def download_so_file(filename, sys_info, cpu_info, main_url):
     if result == 0:
         print(f"下载完成：{filename},调用check_so_file函数")
         check_so_file(filename,sys_info,cpu_info)
+
     else:
         print(f"下载失败：{filename}")
 
 
 if __name__ == '__main__':
-    check_environment('yuyd')
+    check_environment('mtz')
