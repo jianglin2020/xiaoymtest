@@ -1,6 +1,5 @@
 import requests
 import time
-import json
 import yaml
 
 def load_config(config_path='config.yaml'):
@@ -22,9 +21,8 @@ xyy_config = config['xyy_config']
 
 
 class GoldCollector:
-    def __init__(self, base_url, account):
+    def __init__(self, account):
         self.session = requests.Session()
-        self.base_url = base_url
         self.account = account
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x63060012)'
@@ -37,12 +35,80 @@ class GoldCollector:
             time.sleep(1)
         print("\r等待完成！" + " " * 20)  # 清除行尾
 
+    # 获取 domain_url
+    def get_domain_url(self):
+        url = "http://1747921943te.aaik2kk8693.cn/wtmpdomain2"
+        data = {
+            'unionid': self.account['unionid'],
+        }
 
-    def get_initial_page(self, gt_param):
+        try:
+            response = self.session.post(
+                url,
+                headers=self.headers,
+                data=data,
+                cookies={'ejectCode': '1', 'ysmuid': self.account["ysmuid"]},
+                timeout=20
+            )
+            response.raise_for_status()
+            result = response.json()
+
+            if result.get('errcode') == 0:
+                data = result.get('data', {})
+                print(f"🎉 domain地址：{data['domain']}")
+
+                return result.get('data', {}).get('domain', '')
+            else:
+                print(f"获取失败: {result.get('msg', '未知错误')}")
+                return None
+                    
+        except requests.exceptions.RequestException as e:
+            print(f"请求异常: {str(e)}")
+            return None
+
+    def get_sign_info(self):
         """获取初始页面并解析关键参数"""
-        url = f"{self.base_url}/xsysy.html?gt={gt_param}"
+        # url = f"http://1747926292te.519381.cn/yunonline/v1/sign_info"
+        url = f"http://1747926292te.519381.cn/yunonline/v1/hasWechat"
+
+        params = {
+            'unionid': self.account['unionid']
+            # 'time': int(time.time() * 1000)  # 生成13位时间戳
+        }
+
+        try:
+            response = self.session.get(
+                url,
+                headers=self.headers,
+                params=params,
+                cookies={'ysmuid': self.account["ysmuid"]},  # 直接使用值，不要外加 {}
+                timeout=20
+            )
+            response.raise_for_status()
+            result = response.json()
+
+            if result.get('errcode') == 0:
+                data = result.get('data', {})
+                print(f"🎉 登陆数据：{data}")
+            else:
+                print(f"登陆失败: {result.get('msg', '未知错误')}")
+                return None
+                    
+        except requests.exceptions.RequestException as e:
+            print(f"请求异常: {str(e)}")
+            return None 
+
+
+    def get_initial_page(self, domain_url):
+        """获取初始页面并解析关键参数"""
+        url = f"{domain_url}"
         response = self.session.get(url, headers=self.headers)
 
+        # 保存到当前目录的 response.txt
+        with open("response.html", "w", encoding="utf-8") as f:
+            f.write(response.text)
+        
+        print("内容已保存到 response.html")
         return response.text
 
 
@@ -50,7 +116,7 @@ class GoldCollector:
         """获取金币余额"""
         url = f"http://1747913911te.cgwgov.cn/yunonline/v1/gold"
         params = {
-            'unionid': {self.account['unionid']},
+            'unionid': self.account['unionid'],
             'time': int(time.time() * 1000)  # 生成13位时间戳
         }
 
@@ -80,12 +146,19 @@ class GoldCollector:
             return None
 
 
-    def request_article(self, gt_param):
+    def request_article(self, domain_url):
         """请求文章链接"""
-        timestamp = int(time.time() * 1000)
-        api_url = f"{self.base_url}/xdaeryy?gt={gt_param}&time={timestamp}&psgn=168&vs=120"
-        
-        response = self.session.get(api_url, headers=self.headers)
+        # 先处理时间戳（13位毫秒级）
+        timestamp = str(int(time.time() * 1000))
+        new_url = (domain_url
+                .replace("/xsysy.html?", "/xdaeryy?")
+                .replace("&dt=", "&time=") 
+                + "000&psgn=168&vs=120")
+
+
+
+        print(new_url)
+        response = self.session.get(new_url, headers=self.headers)
         if response.status_code == 200:
             return response.json()
         return None
@@ -128,23 +201,29 @@ class GoldCollector:
             self.sleep_with_countdown(60)
 
     
-    def run(self, gt_param):
+    def run(self):
         """执行完整流程"""
-        # 获取初始页面
-        # self.get_initial_page(gt_param)
+        # 登陆
+        self.get_sign_info()
 
         # 查询金币
         self.get_gold_balance()
 
-        # 发送消息
-        self.send_message()
+        # 获取domain_url
+        domain_url = self.get_domain_url()
+
+        # 获取初始页面
+        self.get_initial_page(domain_url)
         
         # 请求文章
-        # article_data = self.request_article(gt_param)
-        # if not article_data or article_data.get('errcode') != 0:
-        #     print("获取文章失败:", article_data.get('msg', '未知错误'))
-        #     return
+        article_data = self.request_article(domain_url)
+        if not article_data or article_data.get('errcode') != 0:
+            print("获取文章失败:", article_data.get('msg', '未知错误'))
+            return
         
+        # 发送消息
+        self.send_message()
+
         # 模拟阅读
         # article_url = article_data['data']['link']
         # start_time = int(time.time())
@@ -160,18 +239,11 @@ class GoldCollector:
         #     print("领取奖励失败:", reward_data.get('msg', '未知错误'))
 
 if __name__ == "__main__":
-    # 使用示例
-    BASE_URL = "http://u1b0ddebb55t05221818.cachuo.asia"
-    GT_PARAM = "421adb47a6bb2f1464dadf6c3f316c8c"  # 从URL获取的gt参数
-
-    # BASE_URL = "http://u8bec9efa46t05221837.cachuo.asia"
-    # GT_PARAM = "f811ee15a47059c7fb7baaa0aa164eb1"  # 从URL获取的gt参数
-    
     # 遍历所有账号
     for account in xyy_config['xyyck']:
-        print(account['name'], account['ysmuid'])
         # 输出当前正在执行的账号
         print(f"\n=======开始执行{account['name']}=======")
+        print(account['name'], account['ysmuid'])
         # current_time = str(int(time.time()))
-        collector = GoldCollector(BASE_URL, account)
-        collector.run(GT_PARAM)
+        collector = GoldCollector(account)
+        collector.run()
