@@ -5,6 +5,7 @@ import yaml
 import json
 import re
 from datetime import datetime, timedelta
+from urllib.parse import unquote, urlparse, parse_qs
 
 
 def load_config(config_path='config.yaml'):
@@ -30,25 +31,53 @@ class GoldCollector:
         # 初始化会话和基本参数
         self.session = requests.Session()  # 使用session保持连接
         self.account = account 
-        self.main_url = f'http://oapi.liyishabiubiu.cn/api/client/read/has_next?val={self.get_main_val()}'
+        self.main_url = f'http://oapi.liyishabiubiu.cn/api/client/read/has_next?val={self.get_main_url2()}'
         self.aid = ''
         self.headers = {'User-Agent': random.choice(config['ua_list'])}  # 随机选择User-Agent
 
-    def get_main_val(self):
-        # 读取文件
-        with open(r"C:\Users\92536\Desktop\token.txt", "r") as file:
-            text = file.read()
+    # def get_main_val(self):
+    #     # 读取文件
+    #     with open(r"C:\Users\92536\Desktop\token.txt", "r") as file:
+    #         text = file.read()
 
-        # 使用正则匹配 ('val', '...')
-        matches = re.findall(r"\('val',\s*'([^']*)'\)", text)
-        if matches:
-            val_value = matches[-1]
-            print("提取的 val 值:", val_value)
-            return val_value
-        else:
-            print("未找到 val 的值")
+    #     # 使用正则匹配 ('val', '...')
+    #     matches = re.findall(r"\('val',\s*'([^']*)'\)", text)
+    #     if matches:
+    #         val_value = matches[-1]
+    #         print("提取的 val 值:", val_value)
+    #         return val_value
+    #     else:
+    #         print("未找到 val 的值")
+    #     return ''
+
+    def get_main_url2(self):
+        url = 'https://oapi.liyishabiubiu.cn/api/client/user/read/link?type=click'
+        headers = {
+            'User-Agent': random.choice(config['ua_list']),
+            'access-token': self.account['token']
+        } 
+
+        response = self.session.get(url, headers=headers)
+        print(f"响应状态码: {response.status_code}")
+
+        # 解析JSON响应内容
+        result = response.json()
+
+        print(result)
+        if result.get('code') == 0:
+            data = result.get('data', {})
+            print(f"🎉 url：{data['url']}")
+            
+            target_url = unquote(data['url'])  # 解码 URL
+
+            print(target_url)
+            match = re.search(r'[?&]val=([^&]+)', target_url)
+            if match:
+                val = match.group(1)
+                print(val)  # 输出: xlxixexlxexnxmycxmxgxjxfxjxmxkxmxexn
+                return val
         return ''
-
+        
     def sleep_with_countdown(self, sleep_time):
         """带倒计时显示的休眠函数"""
         for remaining in range(sleep_time, 0, -1):
@@ -223,8 +252,10 @@ class GoldCollector:
    
         # self.test_weixin_url()
 
+
 if __name__ == "__main__":
-    collector = GoldCollector()
+    account = duoduo_config['duoduock'][1]
+    collector = GoldCollector(account)
     collector.run()
 
     # 遍历所有账号
