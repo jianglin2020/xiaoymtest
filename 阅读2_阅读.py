@@ -30,9 +30,24 @@ class GoldCollector:
         # 初始化会话和基本参数
         self.session = requests.Session()  # 使用session保持连接
         self.account = account 
-        self.main_url = 'http://oapi.liyishabiubiu.cn/api/client/read/has_next?val=xlxixexkxkxhxiycxmxgxjxfxmxfxlxhxlxe'
+        self.main_url = f'http://oapi.liyishabiubiu.cn/api/client/read/has_next?val={self.get_main_val()}'
         self.aid = ''
         self.headers = {'User-Agent': random.choice(config['ua_list'])}  # 随机选择User-Agent
+
+    def get_main_val(self):
+        # 读取文件
+        with open(r"C:\Users\92536\Desktop\token.txt", "r") as file:
+            text = file.read()
+
+        # 使用正则匹配 ('val', '...')
+        matches = re.findall(r"\('val',\s*'([^']*)'\)", text)
+        if matches:
+            val_value = matches[-1]
+            print("提取的 val 值:", val_value)
+            return val_value
+        else:
+            print("未找到 val 的值")
+        return ''
 
     def sleep_with_countdown(self, sleep_time):
         """带倒计时显示的休眠函数"""
@@ -84,7 +99,7 @@ class GoldCollector:
         # 获取参数
         self.extract_params_from_html(response.text)
         read_seconds = random.randint(7, 10)
-        if self.is_10_days_before(self.create_time) or self.author_match in check_whitelist :
+        if self.is_10_days_before(self.create_time) or self.author_match in check_whitelist or self.index <= 2 :
             #10天以前的文章
             self.send_message(url)
         else:
@@ -155,6 +170,7 @@ class GoldCollector:
         """发送30次请求的核心函数"""
         for i in range(1, 31):
             print(f"\n--- 第 {i} 次请求 ---")
+            self.index = i
             # 构造请求URL，添加时间戳参数
             url = f'{self.main_url}&aid={self.aid}&st={int(time.time() * 1000)}' 
             print("请求URL:", url)  
@@ -204,8 +220,7 @@ class GoldCollector:
     def run(self):
         """主运行方法"""
         self.send_requests()
-        # 提现
-        # self.withdraw_to_wechat()
+   
         # self.test_weixin_url()
 
 if __name__ == "__main__":
