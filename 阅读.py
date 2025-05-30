@@ -315,22 +315,22 @@ class GoldCollector:
         # self.get_initial_page()
 
 if __name__ == "__main__":
-    def process_account(account):
-        print(f"\n=======开始执行{account['name']}=======")
-        print(account['name'], account['unionid'])
-        collector = GoldCollector(account)
-        collector.run()
-
-    # 创建线程池
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        for account in xyy_config['xyyck']:
-            executor.submit(process_account, account)
-            time.sleep(60)  # 线程间隔60秒
-    
-    # 遍历所有账号
-    # for account in xyy_config['xyyck']:
-    #     # 输出当前正在执行的账号
+    # def process_account(account):
     #     print(f"\n=======开始执行{account['name']}=======")
     #     print(account['name'], account['unionid'])
     #     collector = GoldCollector(account)
     #     collector.run()
+
+    # # 创建线程池
+    # with ThreadPoolExecutor(max_workers=2) as executor:
+    #     for account in xyy_config['xyyck']:
+    #         executor.submit(process_account, account)
+    #         time.sleep(60)  # 线程间隔60秒
+    
+    # 遍历所有账号
+    for account in xyy_config['xyyck']:
+        # 输出当前正在执行的账号
+        print(f"\n=======开始执行{account['name']}=======")
+        print(account['name'], account['unionid'])
+        collector = GoldCollector(account)
+        collector.run()

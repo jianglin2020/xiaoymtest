@@ -126,8 +126,7 @@ class GoldCollector:
         print(result)
         if result.get('code') == 0:
             data = result.get('data', {})
-            print(f"🎉 用户昵称：{data['nickname']}")
-            print(f"🎉 金币剩余：{data['balance']}")
+            print(f"🎉 {data['nickname']} 金币剩余：{data['balance']}")
             return result.get('data', {}).get('balance', 0)
         else:
             print(f"获取余额失败: {result.get('msg', '未知错误')}")
