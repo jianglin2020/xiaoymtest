@@ -34,6 +34,7 @@ class GoldCollector:
         self.main_url = f'http://oapi.liyishabiubiu.cn/api/client/read/has_next?val={self.get_main_val()}'
         self.balance = 0
         self.aid = ''
+        self.create_time = ''
         self.headers = {'User-Agent': random.choice(config['ua_list'])}  # 随机选择User-Agent
 
     def get_main_val(self):
@@ -75,7 +76,7 @@ class GoldCollector:
         """检查目标日期是否是当前日期的前10天"""
         try:
             target = datetime.strptime(target_str, "%Y-%m-%d %H:%M")
-            return target < datetime.now() - timedelta(days=10)
+            return target < datetime.now() - timedelta(days=30)
         except ValueError:
             raise ValueError("日期格式必须为 YYYY-MM-DD HH:MM")
     
@@ -95,6 +96,7 @@ class GoldCollector:
             self.author_match = author_match.group(1).strip()
             print(author_match.group(1).strip())  # 输出: 蜜蜂岛学习
         else:
+            self.author_match = ''
             print("未找到作者")
 
         match = re.search(r'<h1[^>]*id="activity-name"[^>]*>([\s\S]*?)<\/h1>', html_content)

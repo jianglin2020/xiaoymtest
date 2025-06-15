@@ -3,6 +3,11 @@ import re
 import os
 from urllib.parse import urlparse, parse_qs
 
+def ensure_directory_exists(dir_path):
+    """确保目录存在，如果不存在则创建"""
+    os.makedirs(dir_path, exist_ok=True)
+    print(f"确保目录存在: {os.path.abspath(dir_path)}")
+
 def generate_dmku_url(url):
     """生成DMKU弹幕链接"""
     return f"https://dmku.hls.one/?ac=dm&url={url}"
@@ -135,10 +140,11 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
 # 使用示例
 if __name__ == "__main__":
-    output_path = 'Z:\download\电视剧\折腰'
+    output_dir = './output/折腰'
+    ensure_directory_exists(output_dir)
     # 腾讯视频列表
     video_list = [
-        {'name': '31', 'url': 'https://v.qq.com/x/cover/mzc00200kqpbtfg/p4101bg1ckh.html'}
+        {'name': '31', 'url': 'https://v.qq.com/x/cover/mzc00200kqpbtfg/p4101bg1ckh.html'},
     ]
     
     for video in video_list:
@@ -153,16 +159,17 @@ if __name__ == "__main__":
         if not danmaku_data:
             continue
 
-        # 生成输出文件路径
-        output_path = os.path.join(output_path, f"{video['name']}.ass")
+
+        # 生成输出文件路径（修正部分）
+        output_ass_path = os.path.join(output_dir, f"{video['name']}.ass")
         
         # 直接转换为ASS文件
         json_to_bilibili_ass(
             danmaku_data=danmaku_data,
-            output_ass_path=output_path,
-            max_lines=6,            # 上部区域6行
-            scroll_speed=0.8,       # 正常速度
-            fixed_duration=4.0,     # 固定弹幕4秒
-            scroll_duration=7.0     # 滚动弹幕7秒
+            output_ass_path=output_ass_path,
+            max_lines=6,
+            scroll_speed=0.8,
+            fixed_duration=4.0,
+            scroll_duration=7.0
         )
-        print(f"ASS文件已生成: {os.path.abspath(output_path)}")
+        print(f"ASS文件已生成: {os.path.abspath(output_ass_path)}")

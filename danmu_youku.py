@@ -3,6 +3,11 @@ import re
 import os
 from urllib.parse import urlparse, parse_qs
 
+def ensure_directory_exists(dir_path):
+    """确保目录存在，如果不存在则创建"""
+    os.makedirs(dir_path, exist_ok=True)
+    print(f"确保目录存在: {os.path.abspath(dir_path)}")
+
 def extract_youku_vid(url):
     """从优酷URL提取vid"""
     # 尝试从查询参数获取
@@ -148,14 +153,17 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         f.write(ass_header)
         f.write("\n".join(events))
 
-# 使用示例
 if __name__ == "__main__":
-    output_path = 'Z:\download\电视剧\藏海传'
+    # 定义基础输出目录
+    output_dir = './output/藏海传'
+    ensure_directory_exists(output_dir)
+
     # 优酷视频列表
     video_list = [
-        # {'name': '25', 'url': 'https://v.youku.com/video?vid=XNjQ3MjQyNzc0MA==&s=06efbfbd08efbfbdefbf&scm=20140719.apircmd.298496.video_XNjQ3MjQyNzc0MA==&spm=a2hkt.13141534.1_6.d_1_25'},
-        # {'name': '26', 'url': 'https://v.youku.com/video?vid=XNjQ3MjQyOTI5Ng==&s=06efbfbd08efbfbdefbf&scm=20140719.apircmd.298496.video_XNjQ3MjQyOTI5Ng==&spm=a2hkt.13141534.1_6.d_1_26'}
-        {'name': '27', 'url': 'https://v.youku.com/video?vid=XNjQ3NTMzNzYxNg==&s=06efbfbd08efbfbdefbf&scm=20140719.apircmd.298496.video_XNjQ3NTMzNzYxNg==&spm=a2hkt.13141534.1_6.d_1_28'}
+        {'name': '33', 'url': 'https://v.youku.com/video?vid=XNjQ4MDEzODgyNA==&s=06efbfbd08efbfbdefbf&scm=20140719.apircmd.298496.video_XNjQ4MDEzODgyNA==&spm=a2hkt.13141534.1_6.d_1_33'},
+        {'name': '34', 'url': 'https://v.youku.com/video?vid=XNjQ3MjQzMDYyNA==&s=06efbfbd08efbfbdefbf&scm=20140719.apircmd.298496.video_XNjQ3MjQzMDYyNA==&spm=a2hkt.13141534.1_6.d_1_34'},
+        {'name': '35', 'url': 'https://v.youku.com/video?vid=XNjQ4MDE0MDYyNA==&s=06efbfbd08efbfbdefbf&scm=20140719.apircmd.298496.video_XNjQ4MDE0MDYyNA==&spm=a2hkt.13141534.1_6.d_1_35'},
+        {'name': '36', 'url': 'https://v.youku.com/video?vid=XNjQ3MjQyNzc2MA==&s=06efbfbd08efbfbdefbf&scm=20140719.apircmd.298496.video_XNjQ3MjQyNzc2MA==&spm=a2hkt.13141534.1_6.d_1_36'}
     ]
     
     for video in video_list:
@@ -174,16 +182,16 @@ if __name__ == "__main__":
         if not danmaku_data:
             continue
 
-        # 生成输出文件路径
-        output_path = os.path.join(output_path, f"{video['name']}.ass")
+        # 生成输出文件路径（修正部分）
+        output_ass_path = os.path.join(output_dir, f"{video['name']}.ass")
         
         # 直接转换为ASS文件
         json_to_bilibili_ass(
             danmaku_data=danmaku_data,
-            output_ass_path=output_path,
-            max_lines=6,            # 上部区域6行
-            scroll_speed=0.8,       # 正常速度
-            fixed_duration=4.0,     # 固定弹幕4秒
-            scroll_duration=7.0     # 滚动弹幕7秒
+            output_ass_path=output_ass_path,
+            max_lines=6,
+            scroll_speed=0.8,
+            fixed_duration=4.0,
+            scroll_duration=7.0
         )
-        print(f"ASS文件已生成: {os.path.abspath(output_path)}")
+        print(f"ASS文件已生成: {os.path.abspath(output_ass_path)}")
