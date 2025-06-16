@@ -1,21 +1,21 @@
 import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
 import json
 import csv
-from quark_checker import is_quark_link_expired
-from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import defaultdict
+from quark_checker import is_quark_link_expired
 
 # 配置常量
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-    'Cookie': '_ga=GA1.1.1073942622.1746717690; cf_clearance=8xcBZHwqY8z1S65UO9SK4izqxQriO8.bezH5xkbA.2U-1749979997-1.2.1.1-QebtmspU5k62mLJ0dO0iEGIbuJM0e_3qy88xmWWYQdihtRdMc.4kwyaLpfAmlUZ0WTDCPa7g.uRSzekRYaNkyXc2SObtMQrW.0forkC.HqJCAoIXvrmyADHKg1Ki8Gria6Ipg14Pxu9cvl0893LY7vANlWVOU8_PGa24YE_valtlXZUAjK_d2fNysO9RyhzCrCToVhIYu252L_H.3zquft2UaNsEGANBrFqdv3sUCVBpObtnBSPa1zsTEMXXBUoChsHqC0G0KyhzxJXctszRYmTe_A82p0vo8ULC0jVjVAAgSWIb2dfZ5Fb2FiE5ERpj_6k1eyCRotJw_iXjPMrtvZySfi3F.0q5jULLlEaUs5x8SxktZU.p0a4jn35c_z3n; _ga_JSCFX80PZS=GS2.1.s1749979999$o6$g0$t1749980005$j54$l0$h0'
+    'Cookie': 'ga=GA1.1.1073942622.1746717690; _ga_JSCFX80PZS=GS2.1.s1750005197$o7$g1$t1750005202$j55$l0$h0; cf_clearance=an.DJrQqr6kP6eJjkgMuqCNcatfeMxajAUXbHRP6hBc-1750048303-1.2.1.1-xuLgoofaaR0t4Ls6QYq6edQFfIuuQ3up3s6zxrERw2inoOJq09RzIVGt3XbLX9FHwnZXkOJ_heM1ATj1On1Z_NWi4cflWk11a90M9.5WBkGi_fIuDShKo9g4wcnBBWPnz.3kwXeUHLFuih3rBL0ugPnj_WbNs.TVEdp8N0OE7YqYzgzz2P1AVZzKeZw7.r1mpbzP5LHApSbq.znqZ43x3_v1MEXHlR1EmxTjvbYbRUoHgdpNN4Uacihhofzsbvr47YrI7XdGhROoyLoSQmEXwGtvFWxjQeS9ECGRbk.pjE6s9.SMtnqWuHel1uA4jrUBqCmo03QY9S_A6JcEobzkGDNCCP.bRdutEGYTE86jdfJT9_HosQKWcCxewB53p_Ju'
 }
 TARGET_DOMAIN = 'https://pan.quark.cn'
 MAX_WORKERS = 10  # 并发检测线程数
-RETRY_TIMES = 1  # 检测失败重试次数
+RETRY_TIMES = 2  # 检测失败重试次数
 
 def save_to_json(data, filename):
     """保存数据为JSON文件"""
@@ -116,7 +116,7 @@ def batch_check_links(links):
 def main():
     SEARCH_KEYWORD = '长安的荔枝'
     TARGET_SITES = [
-        {'name': '玩偶', 'url': 'https://www.wogg.one'}
+        {'name': '玩偶', 'url': 'https://www.wogg.one'},
         {'name': '至臻', 'url': 'https://xiaomi666.fun'},
         {'name': '二小', 'url': 'http://www.2xiaopan.fun'},
         {'name': '蜡笔', 'url': 'https://feimao666.fun'}
@@ -174,7 +174,7 @@ def main():
 
     # 5. 保存结果
     save_to_json(final_data, f'output.json')
-    save_to_csv(final_data, f'output.csv')
+    # save_to_csv(final_data, f'output.csv')
 
     # 6. 统计结果
     valid_count = sum(1 for x in final_data if x['status'] == "✅ 有效")

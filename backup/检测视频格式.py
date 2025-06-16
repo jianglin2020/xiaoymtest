@@ -81,5 +81,5 @@ def scan_mismatched_files(folder_path):
         print("所有文件的后缀名均与真实格式匹配。")
 
 # 使用示例
-folder_path = r"Z:\download\电视剧"
+folder_path = r"X:\夸克\电视剧\长安的荔枝"
 scan_mismatched_files(folder_path)

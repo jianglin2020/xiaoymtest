@@ -44,10 +44,9 @@ def is_quark_link_expired(url):
         time.sleep(3)  # 等待页面加载
 
         expired_keywords = [
-            "文件已被分享者删除",
-            "文件不存在",
-            "分享链接已失效",
-            "该分享已被取消"
+            "该分享已被取消，无法访问",
+            "文件涉及违规内容已失效",
+            "分享地址已失效"
         ]
         
         page_content = driver.page_source
@@ -65,5 +64,5 @@ def is_quark_link_expired(url):
 
 # 测试代码（可选）
 if __name__ == "__main__":
-    test_url = "https://pan.quark.cn/s/xxxxxxxxxx"
+    test_url = "https://pan.quark.cn/s/f06e211473c7"
     print("🔴 链接已失效" if is_quark_link_expired(test_url) else "🟢 链接有效")
