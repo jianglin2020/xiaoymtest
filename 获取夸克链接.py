@@ -11,10 +11,10 @@ from quark_checker import is_quark_link_expired
 # 配置常量
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-    'Cookie': 'ga=GA1.1.1073942622.1746717690; _ga_JSCFX80PZS=GS2.1.s1750005197$o7$g1$t1750005202$j55$l0$h0; cf_clearance=an.DJrQqr6kP6eJjkgMuqCNcatfeMxajAUXbHRP6hBc-1750048303-1.2.1.1-xuLgoofaaR0t4Ls6QYq6edQFfIuuQ3up3s6zxrERw2inoOJq09RzIVGt3XbLX9FHwnZXkOJ_heM1ATj1On1Z_NWi4cflWk11a90M9.5WBkGi_fIuDShKo9g4wcnBBWPnz.3kwXeUHLFuih3rBL0ugPnj_WbNs.TVEdp8N0OE7YqYzgzz2P1AVZzKeZw7.r1mpbzP5LHApSbq.znqZ43x3_v1MEXHlR1EmxTjvbYbRUoHgdpNN4Uacihhofzsbvr47YrI7XdGhROoyLoSQmEXwGtvFWxjQeS9ECGRbk.pjE6s9.SMtnqWuHel1uA4jrUBqCmo03QY9S_A6JcEobzkGDNCCP.bRdutEGYTE86jdfJT9_HosQKWcCxewB53p_Ju'
+    'Cookie': 'cf_clearance=2yCuZlRbzt0_WwBt0OS7lJwMkVNr.Rab3Pm.jwYCkXY-1750315401-1.2.1.1-wFyQMSI7AnDdhqRL1FK9z_UyYtAjQ75Zw4jBJo3yn2cZwDMXof76aQKofoiT_PzyDFs0w5Xl19_UIrJ6T_zSap3q18zJabX8r7ZLWFo6ivFrGZKuUB7mzX3KahDIL.pM5QIh_v70mYRK.Ov8dawKXV0wu_7Yf5AP33bLZF2g6FaiXzv1B7J5qOtAvjKzg4l2tVbYqZ3_6LuH.9XU4N.hjZgTuw_4Q.1KLcgxAUFsBdED.Nh0TpzXwf3Pwyjdrbv_kzA3WLf5j2_li8wT2ULqqXIF3Co2xzCkWskL2EMJM7JdS2QNMrHOgf3ZOgl90ZvPt2qDoCyuXB1Rc_6sZNUx4W3PIkFMJcJNJTQN.qAVw6ippeZXYtm8E2vrqLXCtver'
 }
 TARGET_DOMAIN = 'https://pan.quark.cn'
-MAX_WORKERS = 10  # 并发检测线程数
+MAX_WORKERS = 5  # 并发检测线程数
 RETRY_TIMES = 2  # 检测失败重试次数
 
 def save_to_json(data, filename):
