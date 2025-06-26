@@ -11,7 +11,7 @@ from quark_checker import is_quark_link_expired
 # 配置常量
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-    'Cookie': 'cf_clearance=2yCuZlRbzt0_WwBt0OS7lJwMkVNr.Rab3Pm.jwYCkXY-1750315401-1.2.1.1-wFyQMSI7AnDdhqRL1FK9z_UyYtAjQ75Zw4jBJo3yn2cZwDMXof76aQKofoiT_PzyDFs0w5Xl19_UIrJ6T_zSap3q18zJabX8r7ZLWFo6ivFrGZKuUB7mzX3KahDIL.pM5QIh_v70mYRK.Ov8dawKXV0wu_7Yf5AP33bLZF2g6FaiXzv1B7J5qOtAvjKzg4l2tVbYqZ3_6LuH.9XU4N.hjZgTuw_4Q.1KLcgxAUFsBdED.Nh0TpzXwf3Pwyjdrbv_kzA3WLf5j2_li8wT2ULqqXIF3Co2xzCkWskL2EMJM7JdS2QNMrHOgf3ZOgl90ZvPt2qDoCyuXB1Rc_6sZNUx4W3PIkFMJcJNJTQN.qAVw6ippeZXYtm8E2vrqLXCtver'
+    'Cookie': '_ga=GA1.1.1073942622.1746717690; cf_clearance=VvMkDP21nk1q_ce.Xvt3BG2FpazGRIEXBtROyXkv2A0-1750909277-1.2.1.1-EQoAoJ.aHmSXzXzNV3luQWeOtG6xtzEpcoRK2zca8B76p4uoRW5ER1BfaWM.Pp3s2JjYjtc2gL1HLdLX8D4d2YdMbqjEtfXSAqIkDyGC1RctOIKuqQS4VhAvUIGrH84J8op5X64K_uYLg9ZDTTOPSFi4f67Q5.F7zDcVxQFb_myUJAHENRmlarrv0xHEkUbrajaSNpknAlhbrYES4Q8Y9hw5JvC5u336QqjoIhxQsd2JyjQAd5iaLUlan3og1aVzH8F0FXIQ6wNlUhmLPQxRiYq3gJPnFUb32c6PDF1P4FIk5y3GTrd0RCg3bIGtWlH6HJzI3M92fjdA2bdxge0GqbNiCxZFR9aszX01cvAgkZf4b_5L9XeyQRvQGZt7EIAX; _ga_JSCFX80PZS=GS2.1.s1750909277$o8$g1$t1750909319$j18$l0$h0; cf_chl_rc_m=2'
 }
 TARGET_DOMAIN = 'https://pan.quark.cn'
 MAX_WORKERS = 5  # 并发检测线程数
@@ -114,7 +114,7 @@ def batch_check_links(links):
     return results
 
 def main():
-    SEARCH_KEYWORD = '长安的荔枝'
+    SEARCH_KEYWORD = '以法之名'
     TARGET_SITES = [
         {'name': '玩偶', 'url': 'https://www.wogg.one'},
         {'name': '至臻', 'url': 'https://xiaomi666.fun'},

@@ -144,6 +144,24 @@ class GoldCollector:
             # 使用示例
             self.sleep_with_countdown(60)
 
+    def withdraw_to_wechat(self):
+        balance = self.get_balance()
+        # 大于3000 执行提现
+        if balance >= 3000:
+            url = f'https://oapi.liyishabiubiu.cn/api/client/user/balance/withdraw?amount={balance}&pay_method=wx'
+            headers = {
+                'User-Agent': random.choice(config['ua_list']),
+                'access-token': self.account['token']
+            } 
+
+            response = self.session.get(url, headers=headers)
+            print(f"响应状态码: {response.status_code}")
+
+            # 解析JSON响应内容
+            result = response.json()
+            
+            print(result)
+    
     # 查询金币
     def get_balance(self):
         url = f'https://oapi.liyishabiubiu.cn/api/client/user/profile'
@@ -167,25 +185,25 @@ class GoldCollector:
             return None
     
     # 余额记录
-    def get_balance_logs(self):
-        url = f'https://oapi.liyishabiubiu.cn/api/client/user/balance/logs'
-        headers = {
-            'User-Agent': random.choice(config['ua_list']),
-            'access-token': self.account['token']
-        } 
+    # def get_balance_logs(self):
+    #     url = f'https://oapi.liyishabiubiu.cn/api/client/user/balance/logs'
+    #     headers = {
+    #         'User-Agent': random.choice(config['ua_list']),
+    #         'access-token': self.account['token']
+    #     } 
 
-        response = self.session.get(url, headers=headers)
+    #     response = self.session.get(url, headers=headers)
 
-        response.raise_for_status()
-        result = response.json()
+    #     response.raise_for_status()
+    #     result = response.json()
 
-        if result.get('code') == 0:
-            data = result.get('data', [])
-            for index, item in enumerate(data, start=1):
-                print(f"{index} {item['amount']} {item['create_time']} {item['id']}")
-        else:
-            # print(f"获取余额失败: {result.get('balance', '未知错误')}")
-            return None
+    #     if result.get('code') == 0:
+    #         data = result.get('data', [])
+    #         for index, item in enumerate(data, start=1):
+    #             print(f"{index} {item['amount']} {item['create_time']} {item['id']}")
+    #     else:
+    #         # print(f"获取余额失败: {result.get('balance', '未知错误')}")
+    #         return None
     
             
     # 今日阅读量
@@ -216,13 +234,13 @@ class GoldCollector:
         for i in range(1, 31):
             num = self.get_today_count()
             self.index = i
-            print(f"\n--- 第{i}次请求 已阅读{num}  ---")
-            self.index = i
+            # self.num = num
             last_balance = self.balance
+            print(f"\n--- 第{i}次请求 已阅读{num}  ---")
             # 构造请求URL，添加时间戳参数
             url = f'{self.main_url}&aid={self.aid}&st={int(time.time() * 1000)}' 
             print("请求URL:", url)  
-            
+            time.sleep(10)
             # 发送GET请求
             response = self.session.get(url, headers=self.headers)
             print(f"响应状态码: {response.status_code}")
@@ -269,17 +287,11 @@ class GoldCollector:
     def run(self):
         """主运行方法"""
         self.send_requests()
-        # 查询余额记录
-        self.get_balance_logs()
-   
+        # 提现
+        self.withdraw_to_wechat()
         # self.test_weixin_url()
 
-
 if __name__ == "__main__":
-    # account = duoduo_config['duoduock'][3]
-    # collector = GoldCollector(account)
-    # collector.run()
-
     # 遍历所有账号
     for account in duoduo_config['duoduock']:
         # 输出当前正在执行的账号
