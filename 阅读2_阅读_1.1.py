@@ -143,7 +143,8 @@ class GoldCollector:
             print("以将该文章推送至微信请在60s内点击链接完成阅读--30s后继续运行")
             # 使用示例
             self.sleep_with_countdown(60)
-
+            
+    # 微信提现
     def withdraw_to_wechat(self):
         balance = self.get_balance()
         # 大于3000 执行提现

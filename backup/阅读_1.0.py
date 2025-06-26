@@ -325,7 +325,7 @@ if __name__ == "__main__":
     # with ThreadPoolExecutor(max_workers=2) as executor:
     #     for account in xyy_config['xyyck']:
     #         executor.submit(process_account, account)
-    #         time.sleep(60)  # 线程间隔60秒
+    #         time.sleep(30)  # 线程间隔30秒
     
     # 遍历所有账号
     for account in xyy_config['xyyck']:
