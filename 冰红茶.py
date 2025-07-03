@@ -37,7 +37,7 @@ def main():
     os.makedirs("qrcodes", exist_ok=True)
     
     print("生成的URL及二维码：")
-    for i in range(1, 1000):  # 生成10个
+    for i in range(1, 10):  # 生成10个
         url = generate_url()
         print(f"{i}. {url}")
         
