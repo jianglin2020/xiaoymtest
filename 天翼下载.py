@@ -10,7 +10,7 @@ class TianyiDownloader:
         self.session.headers.update({
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
             'accept': 'application/json;charset=UTF-8',
-            'cookie': 'Hm_lvt_9c25be731676bc425f242983796b341c=1742357985; userId=201%7C2022072000368771793; zhizhendata2015jssdkcross=%7B%22distinct_id%22%3A%22MjAyMjA3MjAwMDM2ODc3MTc5Mw%3D%3D%22%2C%22first_id%22%3A%22195ac9df37d798-0cff8224617bd2-26021051-1821369-195ac9df37e1619%22%2C%22props%22%3A%7B%22%24latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22%24latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22%24latest_referrer%22%3A%22%22%7D%2C%22login_type%22%3A%22%22%2C%22utms%22%3A%7B%7D%2C%22%24device_id%22%3A%22195ac9df37d798-0cff8224617bd2-26021051-1821369-195ac9df37e1619%22%7D; apm_key=3D79FAD30746356E8A33A5D0F38CE4F2; apm_uid=504A44F36D169C530EAC8A72C667AD62; apm_ct=20250622101758000; apm_ua=B9CBD8DC13F19F9E7EB854F472BFA274; JSESSIONID=CD945E48D0156C14E8C9D68E97242D2F; COOKIE_LOGIN_USER=32FDAF63FE3ED5D04B607C53E5BD9D5D06B9BAB25A864B2B4E647CDC89C0F911116218FB08FA4578DA2715CB3A79B695E0DA1B309F038142'
+            'cookie': 'JSESSIONID=8F8A1E3401136788F791DE20B49293E1; COOKIE_LOGIN_USER=FD001E05F8172AE40CF2B5059540834EFEB6B6A0424681FB6FA7788A06E77C0E0493473BB2802A34165069E850F6A6B26D2DEF2A581EE2C0'
         })
         self.base_url = "https://cloud.189.cn"
         self.download_history = {}  # 下载历史记录
@@ -54,7 +54,7 @@ class TianyiDownloader:
         """检查文件是否已下载"""
         # 先检查ID是否在历史记录中
         if str(file_id) not in self.download_history:
-            print(f'{file_name} 不在历史记录中')
+            # print(f'{file_name} 不在历史记录中')
             return False
 
         return True
@@ -73,15 +73,15 @@ class TianyiDownloader:
             sorted_file_list = fileList
 
         # 显示排序结果
-        print("\n下载顺序：")
-        for i, item in enumerate(sorted_file_list, 1):
-            print(f"{i}. {item['name']}")
+        # print("\n下载顺序：")
+        # for i, item in enumerate(sorted_file_list, 1):
+        #     print(f"{i}. {item['name']}")
 
         return sorted_file_list
     
-    def verify_share(self, share_url):
+    def verify_share(self, share_item):
         """解析分享链接获取shareId和accessCode"""
-        parsed = urlparse(share_url)
+        parsed = urlparse(share_item['url'])
         query = parse_qs(parsed.query)
         
         if 'code' not in query:
@@ -98,15 +98,16 @@ class TianyiDownloader:
 
         response = self.session.get(url, params=params)
 
-        if response.status_code == 400:
-            raise ConnectionError("文件正在加紧审核中")
+        # if response.status_code == 400:
+        #     raise ConnectionError(f"{share_item['name']} 正在审核中")
         # elif response.status_code != 200:
         #     raise ConnectionError("验证分享链接失败")
-            
+     
         data = response.json()
-        print(f'\n{data}')
+        # print(f"\n{data}")
+
         if data['res_code'] != 0:
-            raise ValueError(f"验证失败: {data.get('res_message', '未知错误')}")
+            raise ValueError(f"{share_item['name']} {data.get('res_message', '未知错误')}")
             
         return data
 
@@ -151,8 +152,10 @@ class TianyiDownloader:
 
         response = self.session.get(url, params=params)
 
-        if response.status_code != 200:
-            raise ConnectionError("获取下载链接失败")
+        if response.status_code == 400:
+            raise ConnectionError("cookie失效")
+        # elif response.status_code != 200:
+        #   raise ConnectionError("验证分享链接失败")
             
         data = response.json()
 
@@ -224,13 +227,13 @@ class TianyiDownloader:
             size_bytes /= 1024
         return f"{size_bytes:.1f}TB"
     
-    def download_share_file(self, share_url, save_dir):
+    def download_share_file(self, share_item, save_dir):
         """下载天翼云盘分享文件主函数"""
         # 创建保存目录
         # os.makedirs(save_dir, exist_ok=True)
   
         # 验证分享链接
-        share_info = self.verify_share(share_url)
+        share_info = self.verify_share(share_item)
         
         # 第一层数据
         fileListAO = self.fileList_share(share_info)
@@ -248,10 +251,10 @@ class TianyiDownloader:
         
         # 排序后下载
         for fileListItem in self.sort_file_list(fileList):
-            print(f"\n{'='*30} {fileListItem['name']} {'='*30}")
             if self._is_downloaded(fileListItem['id'], fileListItem['name']):
-                print(f"✓ 历史文件已下载过，跳过: {fileListItem['name']}")
+                # print(f"✓ 历史文件已下载过，跳过: {fileListItem['name']}")
                 continue
+            print(f"\n{'='*30} {fileListItem['name']} {'='*30}")
             # 获取下载链接
             download_url = self.get_download_url({
                 'shareId': share_info['shareId'],
@@ -286,7 +289,7 @@ if __name__ == "__main__":
     share_list = [
       {'name': '以法之名', 'url': 'https://cloud.189.cn/web/share?code=77nuYf3AjYJ3' },
       {'name': '锦绣芳华', 'url': 'https://cloud.189.cn/web/share?code=3YVJveiIzQne' },
-      {'name': '书卷一梦', 'url': 'https://cloud.189.cn/web/share?code=BFzEzaaeaUB3' },
+      {'name': '书卷一梦', 'url': 'https://cloud.189.cn/web/share?code=AVjAFfuYBFna' },
       {'name': '奔跑吧兄弟', 'url': 'https://cloud.189.cn/web/share?code=MVRBnqRRF3M3' }
     ]
         
@@ -295,6 +298,7 @@ if __name__ == "__main__":
         for share_item in share_list:
           # 指定保存目录（默认为当前目录下的downloads文件夹）
           save_dir = f"Z:\download\下载\{share_item['name']}"
-          downloader.download_share_file(share_item['url'], save_dir)
+          downloader.download_share_file(share_item, save_dir)
+        print('下载完成！')
     except Exception as e:
         print(f"下载失败: {str(e)}")
