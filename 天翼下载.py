@@ -10,7 +10,7 @@ class TianyiDownloader:
         self.session.headers.update({
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
             'accept': 'application/json;charset=UTF-8',
-            'cookie': 'JSESSIONID=8F8A1E3401136788F791DE20B49293E1; COOKIE_LOGIN_USER=FD001E05F8172AE40CF2B5059540834EFEB6B6A0424681FB6FA7788A06E77C0E0493473BB2802A34165069E850F6A6B26D2DEF2A581EE2C0'
+            'cookie': tianyiCookie
         })
         self.base_url = "https://cloud.189.cn"
         self.download_history = {}  # 下载历史记录
@@ -107,7 +107,17 @@ class TianyiDownloader:
         # print(f"\n{data}")
 
         if data['res_code'] != 0:
-            raise ValueError(f"{share_item['name']} {data.get('res_message', '未知错误')}")
+            error_msg = data.get('res_message', '未知错误')
+            # 定义常见错误的中文翻译
+            error_translations = {
+                "share audit not pass.": "文件审核不通过",
+                "reviewStatus=0, share audit waiting.": "文件审核中"
+            }
+    
+            # 如果错误消息在字典里，替换成中文，否则保留原错误
+            chinese_error = error_translations.get(error_msg, error_msg)
+            
+            raise ValueError(f"{share_item['name']} {chinese_error}")
             
         return data
 
@@ -152,6 +162,7 @@ class TianyiDownloader:
 
         response = self.session.get(url, params=params)
 
+        # print(response.json())
         if response.status_code == 400:
             raise ConnectionError("cookie失效")
         # elif response.status_code != 200:
@@ -287,15 +298,17 @@ class TianyiDownloader:
 if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
-      {'name': '以法之名', 'url': 'https://cloud.189.cn/web/share?code=77nuYf3AjYJ3' },
-      {'name': '锦绣芳华', 'url': 'https://cloud.189.cn/web/share?code=3YVJveiIzQne' },
-      {'name': '书卷一梦', 'url': 'https://cloud.189.cn/web/share?code=AVjAFfuYBFna' },
-      {'name': '奔跑吧兄弟', 'url': 'https://cloud.189.cn/web/share?code=MVRBnqRRF3M3' }
+      {'name': '朝雪录', 'url': 'https://cloud.189.cn/web/share?code=zy6J3aRFnYFr' },
+      {'name': '樱桃琥珀', 'url': 'https://cloud.189.cn/web/share?code=RruAjqyq2yqy' },
+      {'name': '奔跑吧！兄弟', 'url': 'https://cloud.189.cn/web/share?code=MVRBnqRRF3M3' }
     ]
+
+    tianyiCookie = 'JSESSIONID=A727B98D67A493D23FD8EAE5863F619C; COOKIE_LOGIN_USER=26C5AD191ABDC0487538A216CC1AA5360FDEA4389575A859AD7852FD6169372DF6631F648FED52673A710C474229A87034AEE803443E0C79'
         
     downloader = TianyiDownloader()
     try:
         for share_item in share_list:
+          print(share_item)
           # 指定保存目录（默认为当前目录下的downloads文件夹）
           save_dir = f"Z:\download\下载\{share_item['name']}"
           downloader.download_share_file(share_item, save_dir)
