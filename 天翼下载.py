@@ -3,6 +3,11 @@ import os
 import time
 import json
 from urllib.parse import urlparse, parse_qs
+from dotenv import load_dotenv
+from tianyiLogin import TianyiCloudLogin
+
+# 加载环境变量
+load_dotenv(dotenv_path='.env.local', verbose=True)
 
 class TianyiDownloader:
     def __init__(self):
@@ -190,6 +195,7 @@ class TianyiDownloader:
       speed = 0
       
       response = self.session.get(download_url, stream=True)
+
       if response.status_code != 200:
           raise ConnectionError(f"下载失败，状态码：{response.status_code}")
       
@@ -271,6 +277,7 @@ class TianyiDownloader:
                 'shareId': share_info['shareId'],
                 'fileId': fileListItem['id']
             })
+
             # 构建保存路径
             save_path = os.path.join(save_dir, fileListItem['name'])
 
@@ -303,8 +310,8 @@ if __name__ == "__main__":
       {'name': '奔跑吧！兄弟', 'url': 'https://cloud.189.cn/web/share?code=MVRBnqRRF3M3' }
     ]
 
-    tianyiCookie = 'JSESSIONID=A727B98D67A493D23FD8EAE5863F619C; COOKIE_LOGIN_USER=26C5AD191ABDC0487538A216CC1AA5360FDEA4389575A859AD7852FD6169372DF6631F648FED52673A710C474229A87034AEE803443E0C79'
-        
+    tianyiCookie = os.getenv('TIANYI_COOKIE')
+
     downloader = TianyiDownloader()
     try:
         for share_item in share_list:
@@ -314,4 +321,10 @@ if __name__ == "__main__":
           downloader.download_share_file(share_item, save_dir)
         print('下载完成！')
     except Exception as e:
-        print(f"下载失败: {str(e)}")
+        if str(e) == 'cookie失效':
+            # 用户登陆
+            cloud_login = TianyiCloudLogin()
+            tianyiCookie = cloud_login.login_by_password()
+            print(f'{tianyiCookie}\n')
+        else:
+            print(f"下载失败: {str(e)}")
