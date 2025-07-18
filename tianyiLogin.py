@@ -15,11 +15,11 @@ class TianyiCloudLogin:
             'Accept': 'application/json;charset=UTF-8'
         })
         
-        # 天翼云相关URL
+        # 天翼云URL
         self.AUTH_URL = "https://open.e.189.cn"
 
     # 保存cookie
-    def save_cookie(cookie):
+    def save_cookie(self, cookie):
         set_key('.env.local', "TIANYI_COOKIE", cookie)
         print(f"Cookie已保存到 .env.local")
 
@@ -39,44 +39,27 @@ class TianyiCloudLogin:
         return response.json()
     
     def get_login_params(self):
-        """获取登录页面参数"""
-        url = f"https://cloud.189.cn/api/portal/loginUrl.action?redirectURL=https://cloud.189.cn/web/redirect.html&defaultSaveName=3&defaultSaveNameCheck=uncheck&browserId=8d38da4344fba4699d13d6e6854319d7"
-    
-        response = self.session.get(url)
-
-        all_cookies = {}  # 保存所有重定向步骤的 Cookie
-
-        # 检查重定向历史
-        for resp in response.history:
-            # print(f"重定向 URL: {resp.url}")
-            # print("中间 Set-Cookie:", resp.headers.get('Set-Cookie'))  # 修正为 resp.headers
-            current_cookies = resp.cookies.get_dict()
-            # print(f"中间 Cookie: {current_cookies}")
-            
-            # 合并当前步骤的 Cookie（避免覆盖）
-            all_cookies.update(current_cookies)
-
+        """获取登录页面参数"""    
+        response = self.session.get("https://cloud.189.cn/api/portal/loginUrl.action")
 
         # 从url中提取关键参数 url.query
         query_params = parse_qs(response.url)  # 返回字典，值为列表（因为参数可重复）
 
         url = f"{self.AUTH_URL}/api/logbox/oauth2/appConf.do"
 
-        self.lt = query_params['lt'][0]
-
-        headers = {
+        self.session.headers.update({
+            'Referer': self.AUTH_URL,
             'lt': query_params['lt'][0],
             'reqId': query_params['reqId'][0],
-            'cookie': f"LT={all_cookies['LT']}"
-        }
+        })
 
         data = {
             'appKey': 'cloud',
             'version': '2.0',
         }
 
-        response = self.session.post(url, data=data, headers=headers)
-        # print(response.json())
+        response = self.session.post(url, data=data)
+        print(response.json())
 
         return response.json().get('data', {})
    
@@ -121,12 +104,8 @@ class TianyiCloudLogin:
 
         # 3. 提交登录请求
         login_url = f"{self.AUTH_URL}/api/logbox/oauth2/loginSubmit.do"
-        headers = {
-            'Referer': self.AUTH_URL,
-            'lt': self.lt,
-            'reqid': login_params['reqId']
-        }
-        response = self.session.post(login_url, data=data, headers=headers)
+        
+        response = self.session.post(login_url, data=data)
 
         print(response.json())
         self._check_error(response)
@@ -140,11 +119,9 @@ class TianyiCloudLogin:
         print(redirect_url)
         """获取web端session"""
         response = self.session.get(redirect_url)
-             # 检查重定向历史
-        cookie = {}     
-        for resp in response.history:
-            cookie = resp.cookies.get_dict()
-            # print(resp.cookies.get_dict())
+
+        # 检查重定向历史
+        cookie = response.history[0].cookies.get_dict()     
 
         # 转换为字符串格式
         cookies_str = '; '.join([f'{k}={v}' for k, v in cookie.items()])
@@ -161,6 +138,7 @@ if __name__ == "__main__":
     try:
         # 执行登录
         login_result = cloud_login.login_by_password()
+
         print("登录成功!")
         print("cookie信息:", login_result)
         

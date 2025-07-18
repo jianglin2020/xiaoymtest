@@ -313,13 +313,15 @@ if __name__ == "__main__":
     tianyiCookie = os.getenv('TIANYI_COOKIE')
 
     downloader = TianyiDownloader()
+
     try:
         for share_item in share_list:
-          print(share_item)
-          # 指定保存目录（默认为当前目录下的downloads文件夹）
-          save_dir = f"Z:\download\下载\{share_item['name']}"
-          downloader.download_share_file(share_item, save_dir)
+            print(share_item)
+            # 指定保存目录（默认为当前目录下的downloads文件夹）
+            save_dir = f"Z:\download\下载\{share_item['name']}"
+            downloader.download_share_file(share_item, save_dir)
         print('下载完成！')
+
     except Exception as e:
         if str(e) == 'cookie失效':
             # 用户登陆
