@@ -1,17 +1,47 @@
+import os
 import requests
 from datetime import datetime
+from dotenv import load_dotenv
+
+# 加载环境变量
+load_dotenv(dotenv_path='.env.local', verbose=True)
 
 headers = {
-  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxNDM0ODdjYy0xYzU5LTQ4YWItYTM2MS1iNjBhN2EzYTRmYmYiLCJyb2xlIjoxLCJpYXQiOjE3NTI4MDU1MDMsImV4cCI6MTc1MjgyNzEwM30.L5sOE9OfEKxnTP17OPERFRViRd863XrynE9Wi7NR0QE'
+  'Authorization': ''
 }
 
 url_host = 'http://192.168.1.120:8818'
 
+# 登陆
+def getCloudLogin():
+  # 获取 环境变量值
+  username = os.getenv('cloudSaverUsername')
+  password = os.getenv('cloudSaverPassword')
+        
+  url = f'{url_host}/api/user/login'
+  data = {
+    'username': username,
+    'password': password
+  }
+
+  response = requests.post(url, json=data)
+  data = response.json().get('data', {})
+
+  headers['Authorization'] = f"Bearer {data['token']}"
+  
+  print(headers)
+
+
 # 豆瓣热门
-def getDoubanHot():  
+def getDoubanHot(type):
+    getCloudLogin()
     url = f'{url_host}/api/douban/hot'
+    typeList = {
+      1: 'tv',
+      2: 'show',
+    }
     params = {
-        "type": 'tv',
+        "type": typeList[type],
         "category": "show",
         "api": "tv",
         "limit": 10
@@ -21,13 +51,14 @@ def getDoubanHot():
     
     data = response.json().get('data', [])
     
-    for item in data[:5]:
+    for item in data[:6]:
       print(f"\n================{item['title']} {item['episodes_info']}======================")
       getCloudLinks(item['title'])
 
 
 # 获取链接
 def getCloudLinks(name):
+  name = name.split(' ')[0] # 只要前面名称
   url = f'{url_host}/api/search?keyword={name}'
   response = requests.get(url, headers=headers)
   response.raise_for_status()  # 检查请求是否成功
@@ -43,4 +74,4 @@ def getCloudLinks(name):
         print(it['messageId'], it['cloudLinks'], pubDate)
 
 if __name__ == "__main__":
-  getDoubanHot()
+  getDoubanHot(1)

@@ -17,6 +17,9 @@ def generate_url(base_url="HTTPS://25.KSF.CN"):
     random_code = generate_random_code()
     return f"{base_url}?{random_code}"
     # return f"{base_url}?RN9VYHRO2U0KBG"
+    # HTTPS://25.KSF.CN?RN9VYHRO2U0KBG"
+    # HTTPS://25.KSF.CN?RVMFGULGYAHFAM
+    # HTTPS://25.KSF.CN?JBTJULYOQ04PDP
 
 
 def generate_qrcode(url, save_path):
@@ -37,7 +40,7 @@ def main():
     os.makedirs("qrcodes", exist_ok=True)
     
     print("生成的URL及二维码：")
-    for i in range(1, 10):  # 生成10个
+    for i in range(1, 20):  # 生成10个
         url = generate_url()
         print(f"{i}. {url}")
         
