@@ -306,7 +306,8 @@ if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
       {'name': '朝雪录', 'url': 'https://cloud.189.cn/web/share?code=zy6J3aRFnYFr' },
-      {'name': '樱桃琥珀', 'url': 'https://cloud.189.cn/web/share?code=RruAjqyq2yqy' }
+      {'name': '樱桃琥珀', 'url': 'https://cloud.189.cn/web/share?code=RruAjqyq2yqy' },
+      {'name': '扫毒风暴', 'url': 'https://cloud.189.cn/web/share?code=zmuaM33yQRRz' }
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')

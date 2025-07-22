@@ -51,7 +51,7 @@ def getDoubanHot(type):
     
     data = response.json().get('data', [])
     
-    for item in data[:6]:
+    for item in data[:5]:
       print(f"\n================{item['title']} {item['episodes_info']}======================")
       getCloudLinks(item['title'])
 
