@@ -5,6 +5,7 @@ import json
 from urllib.parse import urlparse, parse_qs
 from dotenv import load_dotenv
 from tianyiLogin import TianyiCloudLogin
+from tianyiRename import rename_files
 
 # 加载环境变量
 load_dotenv(dotenv_path='.env.local', verbose=True)
@@ -321,6 +322,7 @@ if __name__ == "__main__":
             save_dir = f"Z:\download\下载\{share_item['name']}"
             downloader.download_share_file(share_item, save_dir)
         print('下载完成！')
+        rename_files() # 重命名
 
     except Exception as e:
         if str(e) == 'cookie失效':
