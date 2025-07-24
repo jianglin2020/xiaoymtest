@@ -34,7 +34,6 @@ def getCloudLogin():
 
 # 豆瓣热门
 def getDoubanHot(type):
-    getCloudLogin()
     url = f'{url_host}/api/douban/hot'
     typeList = {
       1: 'tv',
@@ -55,7 +54,6 @@ def getDoubanHot(type):
       print(f"\n================{item['title']} {item['episodes_info']}======================")
       getCloudLinks(item['title'])
 
-
 # 获取链接
 def getCloudLinks(name):
   name = name.split(' ')[0] # 只要前面名称
@@ -72,6 +70,12 @@ def getCloudLinks(name):
         # 转换为可读格式（示例）
         pubDate = dt.strftime("%Y-%m-%d %H:%M:%S")  # 格式化为 "2025-07-13 14:57:21"
         print(it['messageId'], it['cloudLinks'], pubDate)
+        
+# 主方法        
+def main():
+  getCloudLogin() # 登陆
+  getDoubanHot(1) # 电视剧
+  getDoubanHot(2) # 综艺
 
 if __name__ == "__main__":
-  getDoubanHot(1)
+  main()

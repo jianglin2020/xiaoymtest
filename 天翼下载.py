@@ -308,7 +308,8 @@ if __name__ == "__main__":
     share_list = [
       {'name': '朝雪录', 'url': 'https://cloud.189.cn/web/share?code=zy6J3aRFnYFr' },
       {'name': '樱桃琥珀', 'url': 'https://cloud.189.cn/web/share?code=RruAjqyq2yqy' },
-      {'name': '扫毒风暴', 'url': 'https://cloud.189.cn/web/share?code=zmuaM33yQRRz' }
+      {'name': '扫毒风暴', 'url': 'https://cloud.189.cn/web/share?code=zmuaM33yQRRz' },
+      {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny' }
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')

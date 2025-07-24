@@ -11,7 +11,7 @@ from quark_checker import is_quark_link_expired
 # 配置常量
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-    'Cookie': '_ga=GA1.1.1073942622.1746717690; _ga_JSCFX80PZS=GS2.1.s1750909277$o8$g1$t1750909434$j60$l0$h0; cf_clearance=s8e90jouSMC7vMJAVZWtUJbYQZU.7e4Q6V9kHh2JGiU-1751187167-1.2.1.1-H80xQzKuz..d.O19o.2otr4jsVAH_MTdoZgFQilOgjzMEUAiA8qHvDhJFiyeE9aL9.cI3OFjLuf3BdrD1E2yBso_VX3d2Lebeg6KiWNSurYFKHSefkpdxT.RHrAo.vbO52a8kSsxTrz9WOJavgxJSLVUgPT.mLw0MOk9XaI2OiMQT3Q_jBRtLAXsXMNGwFYuhY0SEwc4FTNtx1J2t9gfaawvpnFoenMf7CmS5tRCrJyHSR1EXz5LjKo13oEPCoYdj8aFtu1fmTTbDIlhFS.FOhFl_VklQTfj237Ak8yR9gT72x7izY1eudSBTFaFi.fwLJ44DH2AD_PV6Y3TfPqDE_iDRh4ukARzOfehZAy28fSAeLgtitsr.S7gy7pZflV0; PHPSESSID=1s26ejlpm81ik5fepm0nnnk4im'
+    'Cookie': '_ga=GA1.1.1073942622.1746717690; cf_clearance=KoaokhNcEqD9XtvccYlxBwBSR5A.P8h8mBzwC9YGjuk-1753347718-1.2.1.1-.BOyza3v5zkOmx4UZKb3jVkEl56d5bNZYLvCTNHwtLuxOv8b1A_eCuFkva_HrOPyjuDc6WVa5UmzRAEGTyqPwfLSdGlrtii1uKQ_5JbTZFYO4yo1SwuGqL18_WF.9CCJ6PnFTbWNIfZws8ZHc_GH3k_7AgppriOe0mTaPaFrBBdKc9J1Ekm_YOI5zNmK57Q7UJUGLdIK3ftLjtFtbk62LBioxCY79Cwidk_qm4TAhP0; _ga_JSCFX80PZS=GS2.1.s1753347720$o4$g0$t1753347720$j60$l0$h0'
 }
 TARGET_DOMAIN = 'https://pan.quark.cn'
 MAX_WORKERS = 5  # 并发检测线程数
@@ -114,7 +114,7 @@ def batch_check_links(links):
     return results
 
 def main():
-    SEARCH_KEYWORD = '以法之名'
+    SEARCH_KEYWORD = '喜剧之王单口季'
     TARGET_SITES = [
         {'name': '玩偶', 'url': 'https://www.wogg.one'},
         {'name': '至臻', 'url': 'https://xiaomi666.fun'},
