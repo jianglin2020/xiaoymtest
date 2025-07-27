@@ -266,6 +266,8 @@ class TianyiDownloader:
               'fileId': item['id']
             })
             fileList.extend(fileListAOTwo['fileList'])
+        else: # 处理没有第二层
+          fileList.extend(fileListAO['fileList'])
         
         # 排序后下载
         for fileListItem in self.sort_file_list(fileList):
@@ -306,10 +308,11 @@ class TianyiDownloader:
 if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
-      {'name': '朝雪录', 'url': 'https://cloud.189.cn/web/share?code=zy6J3aRFnYFr' },
-      {'name': '樱桃琥珀', 'url': 'https://cloud.189.cn/web/share?code=RruAjqyq2yqy' },
-      {'name': '扫毒风暴', 'url': 'https://cloud.189.cn/web/share?code=zmuaM33yQRRz' },
-      {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny' }
+    # {'name': '樱桃琥珀', 'url': 'https://cloud.189.cn/web/share?code=RruAjqyq2yqy'},
+    # {'name': '扫毒风暴', 'url': 'https://cloud.189.cn/web/share?code=zmuaM33yQRRz'},
+    # {'name': '朝雪录', 'url': 'https://cloud.189.cn/web/share?code=zy6J3aRFnYFr' },
+      {'name': '凡人修仙传', 'url': 'https://cloud.189.cn/web/share?code=mIzmInzyqyuy'},
+      {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'}
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')

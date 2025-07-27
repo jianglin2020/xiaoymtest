@@ -11,7 +11,7 @@ from quark_checker import is_quark_link_expired
 # 配置常量
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-    'Cookie': '_ga=GA1.1.1073942622.1746717690; cf_clearance=KoaokhNcEqD9XtvccYlxBwBSR5A.P8h8mBzwC9YGjuk-1753347718-1.2.1.1-.BOyza3v5zkOmx4UZKb3jVkEl56d5bNZYLvCTNHwtLuxOv8b1A_eCuFkva_HrOPyjuDc6WVa5UmzRAEGTyqPwfLSdGlrtii1uKQ_5JbTZFYO4yo1SwuGqL18_WF.9CCJ6PnFTbWNIfZws8ZHc_GH3k_7AgppriOe0mTaPaFrBBdKc9J1Ekm_YOI5zNmK57Q7UJUGLdIK3ftLjtFtbk62LBioxCY79Cwidk_qm4TAhP0; _ga_JSCFX80PZS=GS2.1.s1753347720$o4$g0$t1753347720$j60$l0$h0'
+    'Cookie': '_ga=GA1.1.1073942622.1746717690; cf_clearance=lyPTiJY4V1AE4NI9uiNbF0NpMszDkasGAYmG1mhfwgU-1753521902-1.2.1.1-FMBSYdeLVgEwEazccjsF9ttqBht5Cuq0KuAyepDkY7iNsz1a2tfqJbWbVEe_640AMEcO91S1707kAuP63v.A.58a.a1PRcWid.0fjACHhF1lOSJgnnuOB_aABVlKPge2da.gaFoz_UXQt3WyfsrQ6HaB9E4a2YuNH_kiG6ZVt3wowG.XX0ME2UmUPtMKhundwsLmA6taS5tMXLKWYnVnGEFNLJdGlZaYcmNXSNLwYqQ; _ga_JSCFX80PZS=GS2.1.s1753521918$o5$g0$t1753521918$j60$l0$h0'
 }
 TARGET_DOMAIN = 'https://pan.quark.cn'
 MAX_WORKERS = 5  # 并发检测线程数
@@ -114,7 +114,7 @@ def batch_check_links(links):
     return results
 
 def main():
-    SEARCH_KEYWORD = '喜剧之王单口季'
+    SEARCH_KEYWORD = '你好星期六'
     TARGET_SITES = [
         {'name': '玩偶', 'url': 'https://www.wogg.one'},
         {'name': '至臻', 'url': 'https://xiaomi666.fun'},
