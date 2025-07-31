@@ -245,6 +245,21 @@ class TianyiDownloader:
             size_bytes /= 1024
         return f"{size_bytes:.1f}TB"
     
+    # 获取文件
+    def get_fileList(self, data, share_info):
+        # 判断是否有文件夹
+        if (len(data['folderList']) != 0):
+            # 第二层数据
+            for item in data['folderList']:
+                fileListAOTwo = self.fileList_share({
+                **share_info,
+                'fileId': item['id']
+                })
+                self.get_fileList(fileListAOTwo, share_info)
+                # self.fileList.extend(fileListAOTwo['fileList'])
+        else: # 处理没有第二层
+            self.fileList.extend(data['fileList'])
+    
     def download_share_file(self, share_item, save_dir):
         """下载天翼云盘分享文件主函数"""
         # 创建保存目录
@@ -256,21 +271,14 @@ class TianyiDownloader:
         # 第一层数据
         fileListAO = self.fileList_share(share_info)
 
-        fileList = []
-        # 判断是否有文件夹
-        if (len(fileListAO['folderList']) != 0):
-          # 第二层数据
-          for item in fileListAO['folderList']:
-            fileListAOTwo = self.fileList_share({
-              **share_info,
-              'fileId': item['id']
-            })
-            fileList.extend(fileListAOTwo['fileList'])
-        else: # 处理没有第二层
-          fileList.extend(fileListAO['fileList'])
-        
+        # 初始化文件列表
+        self.fileList = []
+
+        # 获取文件列表
+        self.get_fileList(fileListAO, share_info)
+
         # 排序后下载
-        for fileListItem in self.sort_file_list(fileList):
+        for fileListItem in self.sort_file_list(self.fileList):
             if self._is_downloaded(fileListItem['id'], fileListItem['name']):
                 # print(f"✓ 历史文件已下载过，跳过: {fileListItem['name']}")
                 continue
@@ -308,10 +316,8 @@ class TianyiDownloader:
 if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
-    # {'name': '樱桃琥珀', 'url': 'https://cloud.189.cn/web/share?code=RruAjqyq2yqy'},
-    # {'name': '扫毒风暴', 'url': 'https://cloud.189.cn/web/share?code=zmuaM33yQRRz'},
-    # {'name': '朝雪录', 'url': 'https://cloud.189.cn/web/share?code=zy6J3aRFnYFr' },
-      {'name': '凡人修仙传', 'url': 'https://cloud.189.cn/web/share?code=mIzmInzyqyuy'},
+      {'name': '利剑·玫瑰', 'url': 'https://cloud.189.cn/web/share?code=Bvu6nyBZzUnm'},
+      {'name': '凡人修仙传(2025)', 'url': 'https://cloud.189.cn/web/share?code=mIzmInzyqyuy'},
       {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'}
     ]
 
