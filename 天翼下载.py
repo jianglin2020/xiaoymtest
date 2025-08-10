@@ -255,8 +255,8 @@ class TianyiDownloader:
                 **share_info,
                 'fileId': item['id']
                 })
-                self.get_fileList(fileListAOTwo, share_info)
-                # self.fileList.extend(fileListAOTwo['fileList'])
+                # self.get_fileList(fileListAOTwo, share_info)
+                self.fileList.extend(fileListAOTwo['fileList'])
         else: # 处理没有第二层
             self.fileList.extend(data['fileList'])
     
@@ -276,7 +276,7 @@ class TianyiDownloader:
 
         # 获取文件列表
         self.get_fileList(fileListAO, share_info)
-
+    
         # 排序后下载
         for fileListItem in self.sort_file_list(self.fileList):
             if self._is_downloaded(fileListItem['id'], fileListItem['name']):
@@ -316,7 +316,8 @@ class TianyiDownloader:
 if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
-      {'name': '利剑·玫瑰', 'url': 'https://cloud.189.cn/web/share?code=Bvu6nyBZzUnm'},
+      # {'name': '利剑·玫瑰', 'url': 'https://cloud.189.cn/web/share?code=Bvu6nyBZzUnm'},
+      # {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
       {'name': '凡人修仙传(2025)', 'url': 'https://cloud.189.cn/web/share?code=mIzmInzyqyuy'},
       {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'}
     ]
