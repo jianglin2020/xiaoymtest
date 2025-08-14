@@ -316,9 +316,9 @@ class TianyiDownloader:
 if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
-      # {'name': '利剑·玫瑰', 'url': 'https://cloud.189.cn/web/share?code=Bvu6nyBZzUnm'},
       # {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-      {'name': '凡人修仙传(2025)', 'url': 'https://cloud.189.cn/web/share?code=mIzmInzyqyuy'},
+      {'name': '锦月如歌', 'url': 'https://cloud.189.cn/web/share?code=IVfaMrvABjma'},
+      {'name': '生万物', 'url': 'https://cloud.189.cn/web/share?code=vQfEfuZFju6j'},
       {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'}
     ]
 

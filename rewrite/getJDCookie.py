@@ -17,7 +17,7 @@ print('''
 ******************************************
 ''')
 import datetime
-from selenium import webdriver
+from selenium import webdriver #selenium==2.53.6
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
