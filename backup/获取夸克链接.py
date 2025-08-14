@@ -10,8 +10,8 @@ from quark_checker import is_quark_link_expired
 
 # 配置常量
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-    'Cookie': '_ga=GA1.1.1073942622.1746717690; cf_clearance=H_XhTOVzhLrdAgV4dACUelE_PbPWOC6HmRv2gmssO6s-1755143919-1.2.1.1-K5dvOjVjS8ME2ZL7UGCBFhCa.Y9TEO19BL_ypOFzlnlBWRfhrVMK_wi4FkHoV2Lw4yvAPkTbyS_ot3RZxo3H3DDoOcVEwwlEi44SS8GYDeT..iOBkJMippBce3If8Ro5ZWMvEiePONPqLwOu2pEWqNi6RAWKwQW5gGgmkjBBcG5nbmDN8osASAlhkRWCSBaCIJHcs7KOY1FysdqtTyGdYLQA92CcDebs38TBjuZvw7w; _ga_JSCFX80PZS=GS2.1.s1755143919$o4$g0$t1755143919$j60$l0$h0'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'
+    # 'Cookie': '_ga=GA1.1.1073942622.1746717690; cf_clearance=H_XhTOVzhLrdAgV4dACUelE_PbPWOC6HmRv2gmssO6s-1755143919-1.2.1.1-K5dvOjVjS8ME2ZL7UGCBFhCa.Y9TEO19BL_ypOFzlnlBWRfhrVMK_wi4FkHoV2Lw4yvAPkTbyS_ot3RZxo3H3DDoOcVEwwlEi44SS8GYDeT..iOBkJMippBce3If8Ro5ZWMvEiePONPqLwOu2pEWqNi6RAWKwQW5gGgmkjBBcG5nbmDN8osASAlhkRWCSBaCIJHcs7KOY1FysdqtTyGdYLQA92CcDebs38TBjuZvw7w; _ga_JSCFX80PZS=GS2.1.s1755143919$o4$g0$t1755143919$j60$l0$h0'
 }
 TARGET_DOMAIN = 'https://pan.quark.cn'
 MAX_WORKERS = 5  # 并发检测线程数
@@ -115,8 +115,9 @@ def batch_check_links(links):
 
 def main():
     SEARCH_KEYWORD = '地球超新鲜'
+    # SEARCH_KEYWORD = '花儿与少年'
     TARGET_SITES = [
-        {'name': '玩偶', 'url': 'https://www.wogg.one'},
+        {'name': '玩偶', 'url': 'https://wogg.xxooo.cf'},
         {'name': '至臻', 'url': 'https://xiaomi666.fun'},
         {'name': '二小', 'url': 'http://www.2xiaopan.fun'},
         {'name': '蜡笔', 'url': 'https://feimao666.fun'}
@@ -136,7 +137,7 @@ def main():
             )
             
             print(f"\n▌ 正在抓取 {site['name']}: {search_url}")
-            response = requests.get(search_url, headers=HEADERS, timeout=10)
+            response = requests.get(search_url, headers=HEADERS, timeout=15)
             soup = BeautifulSoup(response.text, 'html.parser')
             
             for link in extract_a_links(soup, site['url'])[:3]:  # 每个站点只处理前3个结果

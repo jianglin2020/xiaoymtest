@@ -114,14 +114,20 @@ class TianyiDownloader:
 
         if data['res_code'] != 0:
             error_msg = data.get('res_message', '未知错误')
+
             # 定义常见错误的中文翻译
             error_translations = {
-                "share audit not pass.": "文件审核不通过",
-                "reviewStatus=0, share audit waiting.": "文件审核中"
+                "share audit not pass": "文件审核不通过",
+                "share audit waiting": "文件审核中",
+                "share not found or invalid": "访问页面不存在"
             }
     
             # 如果错误消息在字典里，替换成中文，否则保留原错误
-            chinese_error = error_translations.get(error_msg, error_msg)
+            chinese_error = error_msg  # 默认保留原错误
+            for key in error_translations:
+                if key in error_msg:
+                    chinese_error = error_translations[key]
+                    break  # 找到第一个匹配项就退出
             
             raise ValueError(f"{share_item['name']} {chinese_error}")
             

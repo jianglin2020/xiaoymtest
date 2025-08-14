@@ -1,5 +1,5 @@
 # quark_checker.py
-from selenium import webdriver
+from selenium import webdriver # selenium==3.11.0
 from webdriver_manager.chrome import ChromeDriverManager
 from urllib.parse import urlparse
 import time

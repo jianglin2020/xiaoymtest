@@ -54,6 +54,12 @@ def getDoubanHot(type):
       print(f"\n================{item['title']} {item['episodes_info']}======================")
       getCloudLinks(item['title'])
 
+# 自定义查询名称
+def getMyNames(data):
+  for name in data:
+    print(f"\n================{name}======================")
+    getCloudLinks(name)
+
 # 获取链接
 def getCloudLinks(name):
   name = name.split(' ')[0] # 只要前面名称
@@ -64,18 +70,22 @@ def getCloudLinks(name):
   for item in data[:1]:
     if len(item['list']) > 0:
       print(f"{item['channelInfo']['name']}")
-      for it in item['list'][:2]:
+      for it in item['list'][:5]:
         # 解析为 datetime 对象
         dt = datetime.fromisoformat(it['pubDate'])  # Python 3.7+ 支持
         # 转换为可读格式（示例）
         pubDate = dt.strftime("%Y-%m-%d %H:%M:%S")  # 格式化为 "2025-07-13 14:57:21"
-        print(it['messageId'], it['cloudLinks'], pubDate)
+        for i in it['cloudLinks']:
+          # 只显示天翼和夸克链接
+          if i['cloudType'] == 'tianyi' or i['cloudType'] == 'quark':
+            print(it['messageId'], i, pubDate)
         
 # 主方法        
 def main():
   getCloudLogin() # 登陆
-  getDoubanHot(1) # 电视剧
-  getDoubanHot(2) # 综艺
+  # getDoubanHot(1) # 电视剧
+  # getDoubanHot(2) # 综艺
+  getMyNames(['生万物', '锦月如歌', '花儿与少年'])
 
 if __name__ == "__main__":
   main()
