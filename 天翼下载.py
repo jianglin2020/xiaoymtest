@@ -324,7 +324,7 @@ if __name__ == "__main__":
     share_list = [
       # {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
       {'name': '锦月如歌', 'url': 'https://cloud.189.cn/web/share?code=IVfaMrvABjma'},
-      {'name': '生万物', 'url': 'https://cloud.189.cn/web/share?code=vQfEfuZFju6j'},
+      {'name': '生万物', 'url': 'https://cloud.189.cn/web/share?code=iauiQzy6fQnm'},
       {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'}
     ]
 

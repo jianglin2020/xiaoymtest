@@ -1,6 +1,6 @@
 import os
 import requests
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from dotenv import load_dotenv
 
 # 加载环境变量
@@ -71,10 +71,14 @@ def getCloudLinks(name):
     if len(item['list']) > 0:
       print(f"{item['channelInfo']['name']}")
       for it in item['list'][:5]:
-        # 解析为 datetime 对象
-        dt = datetime.fromisoformat(it['pubDate'])  # Python 3.7+ 支持
-        # 转换为可读格式（示例）
-        pubDate = dt.strftime("%Y-%m-%d %H:%M:%S")  # 格式化为 "2025-07-13 14:57:21"
+        # 1. 解析为 datetime 对象（直接支持带时区的格式）
+        dt = datetime.fromisoformat(it['pubDate'])
+        # 2. 转换为东八区时间
+        east_8_tz = timezone(timedelta(hours=8))  # 创建东八区时区
+        beijing_time = dt.astimezone(east_8_tz)   # 转换时区
+        # 3. 格式化为字符串
+        pubDate = beijing_time.strftime("%Y-%m-%d %H:%M:%S") # 输出: 2025-08-14 20:22:17
+
         for i in it['cloudLinks']:
           # 只显示天翼和夸克链接
           if i['cloudType'] == 'tianyi' or i['cloudType'] == 'quark':
@@ -85,7 +89,7 @@ def main():
   getCloudLogin() # 登陆
   # getDoubanHot(1) # 电视剧
   # getDoubanHot(2) # 综艺
-  getMyNames(['生万物', '锦月如歌', '花儿与少年'])
+  getMyNames(['生万物', '锦月如歌', '喜剧之王单口季'])
 
 if __name__ == "__main__":
   main()
