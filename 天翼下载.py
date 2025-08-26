@@ -174,8 +174,8 @@ class TianyiDownloader:
 
         response = self.session.get(url, params=params)
 
-        # print(response.json())
         if response.status_code == 400:
+            print(response.json())
             raise ConnectionError("cookie失效")
         # elif response.status_code != 200:
         #   raise ConnectionError("验证分享链接失败")
@@ -323,9 +323,8 @@ if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
       # {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-      {'name': '锦月如歌', 'url': 'https://cloud.189.cn/web/share?code=IVfaMrvABjma'},
-      {'name': '生万物', 'url': 'https://cloud.189.cn/web/share?code=iauiQzy6fQnm'},
-      {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'}
+      # {'name': '生万物', 'url': 'https://cloud.189.cn/web/share?code=Ar2IFbjEruqu'},
+      {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'},
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')

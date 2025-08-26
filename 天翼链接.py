@@ -89,7 +89,7 @@ def main():
   getCloudLogin() # 登陆
   # getDoubanHot(1) # 电视剧
   # getDoubanHot(2) # 综艺
-  getMyNames(['生万物', '锦月如歌', '喜剧之王单口季'])
+  getMyNames(['生万物', '献鱼', '子夜归', '喜剧之王单口季'])
 
 if __name__ == "__main__":
   main()
