@@ -114,8 +114,8 @@ def batch_check_links(links):
     return results
 
 def main():
-    SEARCH_KEYWORD = '地球超新鲜'
-    # SEARCH_KEYWORD = '花儿与少年'
+    # SEARCH_KEYWORD = '王牌对王牌'
+    SEARCH_KEYWORD = '花儿与少年'
     TARGET_SITES = [
         {'name': '玩偶', 'url': 'https://wogg.xxooo.cf'},
         {'name': '至臻', 'url': 'https://xiaomi666.fun'},
