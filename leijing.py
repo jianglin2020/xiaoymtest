@@ -21,7 +21,9 @@ def getLogin():
     'password': password
   }
   headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
     'x-requested-with': 'XMLHttpRequest',
+    'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8',
     'cookie': 'cms_token=5a069f4401844b8fab41132678ae59d611'
   }
 
@@ -35,7 +37,6 @@ def getLogin():
   cookies_str = '; '.join([f'{k}={v}' for k, v in cookies.items()])
 
   print(cookies_str)      
-
 
 if __name__ == "__main__":
   getLogin()

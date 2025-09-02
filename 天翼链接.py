@@ -54,6 +54,7 @@ def getDoubanHot(type):
     for item in data[:5]:
       print(f"\n================{item['title']} {item['episodes_info']}======================")
       getCloudSaverLinks(item['title'])
+      getPanSouLinks(item['title'])
 
 # 自定义查询名称
 def getMyNames(data):
@@ -90,13 +91,14 @@ def getCloudSaverLinks(name):
 # 获取盘搜链接
 def getPanSouLinks(name):
   print('PanSou')
-  url = f'{url_host2}/api/search?kw={name}&cloud_types=quark,tianyi'
+  name = name.split(' ')[0] # 只要前面名称
+  url = f'{url_host2}/api/search?kw={name}&cloud_types=quark,tianyi&refresh=true'
   response = requests.get(url, headers=headers)
   response.raise_for_status()  # 检查请求是否成功
   data = response.json().get('data', [])
 
   # 定义处理顺序
-  preferred_order = ['tianyi','quark']
+  preferred_order = ['quark']
 
   # 按指定顺序处理
   for key in preferred_order:
@@ -122,7 +124,7 @@ def main():
   getCloudLogin() # 登陆
   # getDoubanHot(1) # 电视剧
   # getDoubanHot(2) # 综艺
-  getMyNames(['生万物', '献鱼', '子夜归', '花儿与少年', '你好星期六', '喜剧之王单口季'])
+  getMyNames(['与晋长安', '献鱼', '子夜归', '花儿与少年', '你好星期六', '喜剧之王单口季'])
 
 if __name__ == "__main__":
   main()
