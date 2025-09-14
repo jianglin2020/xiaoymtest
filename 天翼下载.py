@@ -322,9 +322,9 @@ class TianyiDownloader:
 if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
-      {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-      # {'name': '生万物', 'url': 'https://cloud.189.cn/web/share?code=Ar2IFbjEruqu'},
-      {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'},
+      # {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
+      {'name': '赴山海', 'url': 'https://cloud.189.cn/web/share?code=eYRjQ3jANBJb'},
+      {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'}
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')
