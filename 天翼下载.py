@@ -188,43 +188,117 @@ class TianyiDownloader:
             
         return data['normal']['url']
     
-    def download_file(self, download_url, save_path):
-      # 获取目录路径
-      dir_path = os.path.dirname(save_path)
+    def download_file(self, download_url, save_path, max_retries=3, retry_delay=5):
+        """
+        下载文件（带进度条+实时速度+断点续传+重试机制）
         
-      # 如果目录不存在则创建（递归创建多层目录）
-      os.makedirs(dir_path, exist_ok=True)
+        Args:
+            download_url: 下载URL
+            save_path: 保存路径
+            max_retries: 最大重试次数
+            retry_delay: 重试延迟时间（秒）
+        """
+        # 获取目录路径
+        dir_path = os.path.dirname(save_path)
+        
+        # 如果目录不存在则创建（递归创建多层目录）
+        os.makedirs(dir_path, exist_ok=True)
 
-      """下载文件（带进度条+实时速度）"""
-      start_time = time.time()
-      last_update = start_time
-      downloaded = 0
-      speed = 0
-      
-      response = self.session.get(download_url, stream=True)
+        start_time = time.time()
+        last_update = start_time
+        downloaded = 0
+        speed = 0
+        
+        # 检查文件是否已部分下载
+        file_size = 0
+        if os.path.exists(save_path):
+            file_size = os.path.getsize(save_path)
+            downloaded = file_size
+        
+        # 重试机制
+        for attempt in range(max_retries + 1):
+            try:
+                # 设置断点续传请求头
+                headers = {}
+                if file_size > 0:
+                    headers['Range'] = f'bytes={file_size}-'
+                    print(f"检测到已下载 {file_size} 字节，开始断点续传...")
+                
+                # 设置超时和重试
+                response = self.session.get(
+                    download_url, 
+                    headers=headers, 
+                    stream=True,
+                    timeout=30  # 添加超时设置
+                )
 
-      if response.status_code != 200:
-          raise ConnectionError(f"下载失败，状态码：{response.status_code}")
-      
-      total_size = int(response.headers.get('content-length', 0))
-      
-      with open(save_path, 'wb') as f:
-          for chunk in response.iter_content(chunk_size=1024*1024):  # 1MB chunks
-              if chunk:
-                  f.write(chunk)
-                  downloaded += len(chunk)
-                  
-                  # 每0.5秒更新一次速度（避免闪烁）
-                  now = time.time()
-                  if now - last_update > 0.5:
-                      speed = downloaded / (now - start_time) / 1024 / 1024  # MB/s
-                      last_update = now
-                  
-                  # 打印进度+速度
-                  self._print_progress(downloaded, total_size, speed)
-      
-      print(f"\n下载完成！平均速度：{speed:.2f} MB/s")
-      return save_path
+                # 处理服务器响应
+                if response.status_code == 416:  # 请求范围不满足
+                    print("文件已完整下载")
+                    return save_path
+                elif response.status_code not in [200, 206]:  # 206表示部分内容
+                    raise ConnectionError(f"下载失败，状态码：{response.status_code}")
+                
+                # 获取文件总大小
+                total_size = int(response.headers.get('content-length', 0))
+                if 'content-range' in response.headers:
+                    # 从Content-Range头中获取总大小，格式如：bytes 0-1000/1001
+                    total_size = int(response.headers['content-range'].split('/')[-1])
+                elif total_size == 0:
+                    # 如果无法获取总大小，使用已下载大小作为基准
+                    total_size = file_size
+                
+                # 计算实际需要下载的总大小
+                actual_total_size = total_size
+                
+                # 打开文件，如果已存在则追加，否则创建新文件
+                mode = 'ab' if file_size > 0 else 'wb'
+                with open(save_path, mode) as f:
+                    for chunk in response.iter_content(chunk_size=1024*1024):  # 1MB chunks
+                        if chunk:
+                            f.write(chunk)
+                            f.flush()  # 确保数据写入磁盘
+                            downloaded += len(chunk)
+                            
+                            # 每0.5秒更新一次速度（避免闪烁）
+                            now = time.time()
+                            if now - last_update > 0.5:
+                                elapsed = now - start_time
+                                speed = downloaded / elapsed / 1024 / 1024  # MB/s
+                                last_update = now
+                            
+                            # 打印进度+速度
+                            self._print_progress(downloaded, actual_total_size, speed)
+                
+                # 如果执行到这里，说明下载成功
+                break
+                
+            except (ConnectionError, TimeoutError, requests.exceptions.RequestException) as e:
+                print(f"\n下载出错: {str(e)}")
+                
+                if attempt < max_retries:
+                    print(f"{retry_delay}秒后开始第 {attempt + 1} 次重试...")
+                    time.sleep(retry_delay)
+                    
+                    # 重新获取当前文件大小，因为可能已经下载了一部分
+                    if os.path.exists(save_path):
+                        file_size = os.path.getsize(save_path)
+                        downloaded = file_size
+                    else:
+                        file_size = 0
+                        downloaded = 0
+                else:
+                    print(f"\n下载失败，已达到最大重试次数 {max_retries} 次")
+                    raise
+        
+        # 验证文件完整性
+        final_size = os.path.getsize(save_path)
+        if actual_total_size > 0 and final_size != actual_total_size:
+            print(f"\n警告：文件大小不匹配！期望: {actual_total_size} 字节，实际: {final_size} 字节")
+        else:
+            print(f"\n下载完成！文件大小: {final_size} 字节，平均速度：{speed:.2f} MB/s")
+        
+        return save_path
 
     def _print_progress(self, downloaded, total, speed):
         """带速度显示的进度条"""
@@ -323,8 +397,8 @@ if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
       # {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-      {'name': '赴山海', 'url': 'https://cloud.189.cn/web/share?code=eYRjQ3jANBJb'},
-      {'name': '喜剧之王单口季 第二季', 'url': 'https://cloud.189.cn/web/share?code=me226bv6r6ny'}
+      {'name': '许我耀眼', 'url': 'https://cloud.189.cn/web/share?code=bYVzUvFrMzYv'},
+      {'name': '欢乐家长群 第二季', 'url': 'https://cloud.189.cn/web/share?code=6RRV7rRnAree'}
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')

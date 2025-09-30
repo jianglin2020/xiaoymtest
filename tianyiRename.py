@@ -7,7 +7,7 @@ def rename_files():
   for dirpath, dirnames, filenames in os.walk(path):
       for filename in filenames:
           # 使用正则表达式匹配集数部分
-          match = re.search(r"S01E(\d{2,3})", filename)
+          match = re.search(r"S0[1,2]E(\d{2,3})", filename)
           # match = re.search(r"2021.E(\d{2,3})", filename)
           
           if match:

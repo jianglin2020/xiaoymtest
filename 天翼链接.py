@@ -124,7 +124,7 @@ def main():
   getCloudLogin() # 登陆
   # getDoubanHot(1) # 电视剧
   # getDoubanHot(2) # 综艺
-  getMyNames(['赴山海', '你好星期六', '喜剧之王单口季'])
+  getMyNames(['不眠日','喜人奇妙夜','向往的生活', '你好星期六'])
 
 if __name__ == "__main__":
   main()
