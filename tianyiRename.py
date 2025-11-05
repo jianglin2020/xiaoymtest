@@ -8,7 +8,7 @@ def rename_files():
       for filename in filenames:
           # 使用正则表达式匹配集数部分
           match = re.search(r"S0[1,2]E(\d{2,3})", filename)
-          # match = re.search(r"2021.E(\d{2,3})", filename)
+        #   match = re.search(r"Season.\d.E(\d{2,3})", filename)
           
           if match:
               # 提取匹配到的集数

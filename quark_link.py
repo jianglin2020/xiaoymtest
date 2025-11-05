@@ -1,12 +1,8 @@
 import requests
 import json
-import csv
-import time
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import defaultdict
-from quark_checker import is_quark_link_expired
 
 # 配置常量
 HEADERS = {
@@ -14,23 +10,11 @@ HEADERS = {
     # 'Cookie': '_ga=GA1.1.1073942622.1746717690; cf_clearance=H_XhTOVzhLrdAgV4dACUelE_PbPWOC6HmRv2gmssO6s-1755143919-1.2.1.1-K5dvOjVjS8ME2ZL7UGCBFhCa.Y9TEO19BL_ypOFzlnlBWRfhrVMK_wi4FkHoV2Lw4yvAPkTbyS_ot3RZxo3H3DDoOcVEwwlEi44SS8GYDeT..iOBkJMippBce3If8Ro5ZWMvEiePONPqLwOu2pEWqNi6RAWKwQW5gGgmkjBBcG5nbmDN8osASAlhkRWCSBaCIJHcs7KOY1FysdqtTyGdYLQA92CcDebs38TBjuZvw7w; _ga_JSCFX80PZS=GS2.1.s1755143919$o4$g0$t1755143919$j60$l0$h0'
 }
 TARGET_DOMAIN = 'https://pan.quark.cn'
-MAX_WORKERS = 5  # 并发检测线程数
-RETRY_TIMES = 2  # 检测失败重试次数
 
 def save_to_json(data, filename):
     """保存数据为JSON文件"""
     with open(filename, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
-    print(f"数据已保存到 {filename}")
-
-def save_to_csv(data, filename):
-    """保存数据为CSV文件"""
-    if not data:
-        return
-    with open(filename, 'w', encoding='utf-8-sig', newline='') as f:
-        writer = csv.DictWriter(f, fieldnames=data[0].keys())
-        writer.writeheader()
-        writer.writerows(data)
     print(f"数据已保存到 {filename}")
 
 def extract_a_links(soup, base_url):
@@ -82,50 +66,18 @@ def merge_duplicate_links(data):
         'source': ' / '.join(sorted(item['sources']))
     } for item in merged.values()]
 
-def check_link_status(url):
-    """检测单个链接状态（带重试机制）"""
-    for attempt in range(RETRY_TIMES):
-        try:
-            is_valid = not is_quark_link_expired(url)
-            return "✅ 有效" if is_valid else "❌ 失效"
-        except Exception as e:
-            if attempt == RETRY_TIMES - 1:
-                print(f"检测失败: {url[:60]}... | 错误: {e}")
-                return "❓ 未知"
-            time.sleep(1)
-
-def batch_check_links(links):
-    """并发检测链接有效性"""
-    results = {}
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_url = {
-            executor.submit(check_link_status, link['href']): link['href']
-            for link in links
-        }
-        
-        for i, future in enumerate(as_completed(future_to_url), 1):
-            url = future_to_url[future]
-            try:
-                results[url] = future.result()
-                print(f"进度: {i}/{len(links)} | {url[:60]}... {results[url]}")
-            except Exception as e:
-                print(f"检测出错: {url[:60]}... | 错误: {e}")
-                results[url] = "❓ 未知"
-    return results
-
-def main():
-    # SEARCH_KEYWORD = '王牌对王牌'
-    SEARCH_KEYWORD = '花儿与少年'
+def quark_link(name):
+    SEARCH_KEYWORD = name
     TARGET_SITES = [
         {'name': '玩偶', 'url': 'https://wogg.xxooo.cf'},
         {'name': '至臻', 'url': 'https://xiaomi666.fun'},
-        {'name': '二小', 'url': 'http://www.2xiaopan.fun'},
-        {'name': '蜡笔', 'url': 'https://feimao666.fun'}
+        {'name': '蜡笔', 'url': 'https://feimao666.fun'},
+        # {'name': '二小', 'url': 'http://www.2xiaopan.fun'}
     ]
 
     # 1. 抓取数据
-    print("="*50)
-    print(f"开始搜索: {SEARCH_KEYWORD}")
+    # print("="*50)
+    # print(f"开始搜索: {SEARCH_KEYWORD}")
     all_data = []
     
     for site in TARGET_SITES:
@@ -136,17 +88,17 @@ def main():
                 f"{site['url']}/index.php/vod/search.html?wd={SEARCH_KEYWORD}"
             )
             
-            print(f"\n▌ 正在抓取 {site['name']}: {search_url}")
+            print(f"正在抓取 {site['name']}: {search_url}")
             response = requests.get(search_url, headers=HEADERS, timeout=15)
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            for link in extract_a_links(soup, site['url'])[:3]:  # 每个站点只处理前3个结果
+            for link in extract_a_links(soup, site['url'])[:3]:  # 每个站点只处理前3个结果  
                 if page_data := fetch_page_data(link['link']):
                     for item in page_data:
-                        print(item)
+                        # print(item)
                         item['source'] = site['name']
                     all_data.extend(page_data)
-                    print(f"发现 {len(page_data)} 个夸克链接")
+                    # print(f"发现 {len(page_data)} 个夸克链接")
         except Exception as e:
             print(f"抓取 {site['name']} 失败: {e}")
 
@@ -156,12 +108,7 @@ def main():
         return
 
     merged_data = merge_duplicate_links(all_data)
-    print(f"\n▌ 去重后得到 {len(merged_data)} 个唯一链接")
-
-    # 3. 并发检测
-    print(f"\n▌ 开始并发检测（同时{MAX_WORKERS}个线程）...")
-    start_time = time.time()
-    status_results = batch_check_links(merged_data)
+    # print(f"\n▌ 去重后得到 {len(merged_data)} 个唯一链接")
     
     # 4. 合并结果
     final_data = []
@@ -169,34 +116,10 @@ def main():
         final_data.append({
             'title': item['title'],
             'href': item['href'],
-            'source': item['source'],
-            'status': status_results.get(item['href'], "❓ 未知")
+            'source': item['source']
         })
 
-    # 5. 保存结果
-    save_to_json(final_data, f'output.json')
-    # save_to_csv(final_data, f'output.csv')
-
-    # 6. 统计结果
-    valid_count = sum(1 for x in final_data if x['status'] == "✅ 有效")
-    print(f"\n{'='*50}")
-    print(f"▶ 检测完成 | 耗时: {time.time()-start_time:.1f}秒")
-    print(f"• 有效链接: {valid_count}")
-    print(f"• 失效链接: {sum(1 for x in final_data if x['status'] == '❌ 失效')}")
-    print(f"• 未知状态: {sum(1 for x in final_data if x['status'] == '❓ 未知')}")
-    print(f"{'='*50}")
-
-    # 按来源统计
-    source_stats = defaultdict(lambda: {'valid': 0, 'total': 0})
-    for item in final_data:
-        for source in item['source'].split(' / '):
-            source_stats[source]['total'] += 1
-            if item['status'] == "✅ 有效":
-                source_stats[source]['valid'] += 1
-    
-    print("\n按来源统计:")
-    for source, stat in sorted(source_stats.items()):
-        print(f"{source:<5} | 有效 {stat['valid']:>2}/{stat['total']:>2} | 成功率 {stat['valid']/stat['total']:.0%}")
+    return final_data
 
 if __name__ == '__main__':
-    main()
+    quark_link('你好星期六')

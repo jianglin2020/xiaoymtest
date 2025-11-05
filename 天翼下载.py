@@ -398,7 +398,7 @@ if __name__ == "__main__":
     share_list = [
       # {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
       {'name': '许我耀眼', 'url': 'https://cloud.189.cn/web/share?code=bYVzUvFrMzYv'},
-      {'name': '欢乐家长群 第二季', 'url': 'https://cloud.189.cn/web/share?code=6RRV7rRnAree'}
+      {'name': '一笑随歌', 'url': 'https://cloud.189.cn/web/share?code=bYNrUnbYfmu2'},
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')
