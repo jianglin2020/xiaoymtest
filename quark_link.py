@@ -93,6 +93,7 @@ def quark_link(name):
             soup = BeautifulSoup(response.text, 'html.parser')
             
             for link in extract_a_links(soup, site['url'])[:3]:  # 每个站点只处理前3个结果  
+                # print(link['link'])
                 if page_data := fetch_page_data(link['link']):
                     for item in page_data:
                         # print(item)

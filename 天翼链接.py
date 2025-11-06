@@ -23,6 +23,7 @@ def deal_title(title):
     return parts[0].strip()
   else:
     return title
+
 # 登陆
 def getCloudLogin():
   # 获取 环境变量值
@@ -68,11 +69,13 @@ def getDoubanHot(type):
 
 # 自定义查询名称
 def getMyNames(data):
-  for name in data:
-    print(f"\n================{name}======================")
-    getCloudSaverLinks(name)
-    getQuarkLinks(name)
-    # getPanSouLinks(name)
+  for item in data:
+    print(f"\n================{item['name']}======================")
+    if item['type'] == 1: # 电视剧
+      getCloudSaverLinks(item['name'])
+    else: # 综艺
+      getQuarkLinks(item['name'])
+      # getPanSouLinks(item['name'])
 
 # 获取CloudSaver链接
 def getCloudSaverLinks(name):
@@ -136,12 +139,40 @@ def getPanSouLinks(name):
             if key == 'tianyi' or key == 'quark':
               print(index, {'link': it['url'], 'cloudType': key}, pubDate, it['source'],)
 
+def select_item(data):
+    print("请选择一条数据：")
+    for i, item in enumerate(data, 1):
+        print(f"{i}. {item['name']}")
+    
+    while True:
+        try:
+            choice = int(input("请输入序号: ")) - 1
+            if 0 <= choice < len(data):
+                return data[choice]
+            else:
+                print("序号无效，请重新输入")
+        except ValueError:
+            print("请输入有效数字")
+
 # 主方法        
 def main():
   getCloudLogin() # 登陆
   # getDoubanHot(1) # 电视剧
   # getDoubanHot(2) # 综艺
-  getMyNames(['天地剑心', '森林进化论','现在就出发','向往的生活', '你好星期六'])
-  
+
+  # 运行选择
+  selected_item = select_item([
+    {'name': '天地剑心', 'type': 1},
+    {'name': '暗河传', 'type': 1},
+    {'name': '森林进化论', 'type': 2},
+    {'name': '现在就出发', 'type': 2},
+    {'name': '花儿与少年', 'type': 2},
+    {'name': '向往的生活', 'type': 2},
+    {'name': '你好星期六', 'type': 2}
+  ])
+
+  print("你选择了:", selected_item)
+  getMyNames([selected_item])
+     
 if __name__ == "__main__":
   main()
