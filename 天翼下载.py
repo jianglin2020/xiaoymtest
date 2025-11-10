@@ -397,8 +397,7 @@ if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
       # {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-      {'name': '许我耀眼', 'url': 'https://cloud.189.cn/web/share?code=bYVzUvFrMzYv'},
-      {'name': '一笑随歌', 'url': 'https://cloud.189.cn/web/share?code=bYNrUnbYfmu2'},
+      {'name': '唐朝诡事录之长安', 'url': 'https://cloud.189.cn/web/share?code=2uMzqqM7z6zm'},
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')

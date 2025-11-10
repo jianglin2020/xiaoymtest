@@ -41,7 +41,7 @@ def getCloudLogin():
 
   headers['Authorization'] = f"Bearer {data['token']}"
   
-  print(headers)
+  # print(headers)
 
 
 # 豆瓣热门
@@ -162,11 +162,11 @@ def main():
 
   # 运行选择
   selected_item = select_item([
-    {'name': '天地剑心', 'type': 1},
-    {'name': '暗河传', 'type': 1},
+    {'name': '唐朝诡事录之长安', 'type': 1},
     {'name': '森林进化论', 'type': 2},
-    {'name': '现在就出发', 'type': 2},
+    {'name': '现在就出发', 'type': 1},
     {'name': '花儿与少年', 'type': 2},
+    {'name': '喜人奇妙夜', 'type': 2},
     {'name': '向往的生活', 'type': 2},
     {'name': '你好星期六', 'type': 2}
   ])
