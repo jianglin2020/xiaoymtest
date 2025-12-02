@@ -111,7 +111,7 @@ def getQuarkLinks(name):
 def getPanSouLinks(name):
   print('PanSou')
   name = name.split(' ')[0] # 只要前面名称
-  url = f'{url_host2}/api/search?kw={name}&res=merge&src=all&channels=tianyirigeng&plugins=labi,wanou,zhizhen,leijing&cloud_types=quark,tianyi&refresh=true'
+  url = f'{url_host2}/api/search?kw={name}&res=merge&src=all&channels=tianyirigeng&plugins=gying&cloud_types=quark,tianyi&refresh=true'
   response = requests.get(url, headers=headers)
   response.raise_for_status()  # 检查请求是否成功
   data = response.json().get('data', [])
@@ -162,13 +162,15 @@ def main():
 
   # 运行选择
   selected_item = select_item([
-    {'name': '唐朝诡事录之长安', 'type': 1},
+    {'name': '大生意人', 'type': 1},
+    {'name': '枭起青壤', 'type': 1},
+    {'name': '奔跑吧', 'type': 2},
     {'name': '森林进化论', 'type': 2},
-    {'name': '现在就出发', 'type': 1},
-    {'name': '花儿与少年', 'type': 2},
+    {'name': '现在就出发', 'type': 2},
     {'name': '喜人奇妙夜', 'type': 2},
     {'name': '向往的生活', 'type': 2},
-    {'name': '你好星期六', 'type': 2}
+    {'name': '你好星期六', 'type': 2},
+    {'name': '声生不息', 'type': 2}
   ])
 
   print("你选择了:", selected_item)
