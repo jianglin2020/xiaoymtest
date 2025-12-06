@@ -1,167 +1,1391 @@
-
-===== 账号1 第2次请求 已阅读7 时间: 2025-11-27 19:07:23 金币: 94 => 94 =====
 {
-    "data": null,
-    "code": -9007,
-    "message": "今日阅读次数已达到上限,请明日0点后再试"
+    "errcode": 407,
+    "msg": "请3分钟后再来阅读<br />1、每轮最多30篇，每天6轮。<br />2、转发收徒码，有效收徒10人奖励8元。<br />3、码容易失效，一定要保存永久入口。<br />4、截图任务200金币/个，多做多得。"
 }
-
-===== 账号2 第2次请求 已阅读7 时间: 2025-11-27 19:07:45 金币: 2650 => 2650 =====
 {
-    "data": null,
-    "code": -9007,
-    "message": "今日阅读次数已达到上限,请明日0点后再试"
+    "errcode": 407,
+    "msg": "请10分钟后再来阅读<br />1、每轮最多30篇，每天6轮。<br />2、转发收徒码，有效收徒10人奖励8元。<br />3、码容易失效，一定要保存永久入口。<br />4、截图任务200金币/个，多做多得。"
 }
-
-===== 账号3 第2次请求 已阅读2 时间: 2025-11-27 19:08:07 金币: 30 => 30 =====
 {
-    "data": null,
-    "code": -9007,
-    "message": "今日阅读次数已达到上限,请明日0点后再试"
+    "errcode": 407,
+    "msg": "请15分钟后再来阅读<br />1、每轮最多30篇，每天6轮。<br />2、转发收徒码，有效收徒10人奖励8元。<br />3、码容易失效，一定要保存永久入口。<br />4、截图任务200金币/个，多做多得。"
 }
-
-===== 账号4 第2次请求 已阅读2 时间: 2025-11-27 19:10:14 金币: 30 => 30 =====
 {
+    "errcode": 407,
+    "msg": "请20分钟后再来阅读<br />1、每轮最多30篇，每天6轮。<br />2、转发收徒码，有效收徒10人奖励8元。<br />3、码容易失效，一定要保存永久入口。<br />4、截图任务200金币/个，多做多得。"
+}
+{
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "aid": "b_ulutulw1uluuuluvuluvulutulusuluyulw4uluuulw5ulw8ulw3uluyulw0uluyulw8uluwulw5ulw8uluvuluvulw5uluuulw3ulw8ulw0ulw7ulw6ulw8uluvulutuluzulw1ulw4ulw8ulw2ulw2ulw5ulw4",
-        "url": "https://mp.weixin.qq.com/s/6U3OUkSIiCCv7ilBAVWKQg"
-    },
-    "code": 0,
-    "message": "success"
+        "link": "https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3NzQzMA==&mid=2247563048&idx=2&sn=3bcd8b79137727248fa6a52701b0ff1e&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号4 第3次请求 已阅读2 时间: 2025-11-27 19:10:37 金币: 30 => 30 =====
 {
-    "data": null,
-    "code": -9007,
-    "message": "今日阅读次数已达到上限,请明日0点后再试"
-}
-
-===== 账号1 第2次请求 已阅读0 时间: 2025-11-28 00:12:51 金币: 94 => 94 =====
-{
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "aid": "b_ulupukvaulupulupuluwulupuluqulusukv0ulutukvauluquluuulurukv1ukv1uluqukvbuluxulusuluquluqulupulutukvdukv0ukv0ukvbuluxuluvuluqukvbukvfuluwulutulupuluwulupuluxuluy",
-        "url": "https://mp.weixin.qq.com/s/8eBJJ9hUZhdw_b_syKjVUA"
-    },
-    "code": 0,
-    "message": "success"
+        "link": "https://mp.weixin.qq.com/s?__biz=MzI5NDcxMDIzMA==&mid=2247982566&idx=1&sn=06cd4484f5280ea2f3fa7e31631cfb64&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号1 第7次请求 已阅读5 时间: 2025-11-28 00:13:49 金币: 574 => 574 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=MzAxNDU5MjQ4NA==&mid=2660405447&idx=1&sn=ef91793705e9b761e9b21baee86f4fed&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号2 第2次请求 已阅读0 时间: 2025-11-28 00:14:11 金币: 2650 => 2650 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3NzQzMA==&mid=2247563048&idx=1&sn=f8c4026bc195cba505dd7c1256709c15&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号3 第2次请求 已阅读0 时间: 2025-11-28 00:14:30 金币: 30 => 30 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=MzIzNjc3OTk1Mw==&mid=2247500107&idx=1&sn=1f47b1080f6a4393b9d03bb49af2c5d9&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号4 第2次请求 已阅读0 时间: 2025-11-28 00:14:51 金币: 30 => 30 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=MjcyNjU4MzQyMA==&mid=2654390004&idx=1&sn=b52426714364d1741ca7b980569c4ac4&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号1 第2次请求 已阅读1 时间: 2025-11-30 12:13:31 金币: 574 => 574 =====
 {
-    "data": null,
-    "code": -9007,
-    "message": "今日阅读次数已达到上限,请明日0点后再试"
-}
-
-===== 账号2 第2次请求 已阅读1 时间: 2025-11-30 12:13:53 金币: 2650 => 2650 =====
-{
-    "data": null,
-    "code": -9007,
-    "message": "今日阅读次数已达到上限,请明日0点后再试"
-}
-
-===== 账号3 第2次请求 已阅读1 时间: 2025-11-30 12:14:15 金币: 30 => 30 =====
-{
-    "data": null,
-    "code": -9007,
-    "message": "今日阅读次数已达到上限,请明日0点后再试"
-}
-
-===== 账号4 第2次请求 已阅读1 时间: 2025-11-30 12:14:34 金币: 30 => 30 =====
-{
-    "data": null,
-    "code": -9007,
-    "message": "今日阅读次数已达到上限,请明日0点后再试"
-}
-
-===== 账号1 第2次请求 已阅读0 时间: 2025-12-01 15:34:51 金币: 574 => 574 =====
-{
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=MzkyNjU2ODM2NQ==&mid=2247621413&idx=1&sn=a15a1908c5dc88b3d9b2620caf6b55f8&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号2 第2次请求 已阅读0 时间: 2025-12-01 15:35:10 金币: 2650 => 2650 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=MzkzMjkxMTg2OQ==&mid=2247485079&idx=1&sn=6cfd012cf6eb137aba4e6ac33c274a16&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号3 第2次请求 已阅读0 时间: 2025-12-01 15:35:29 金币: 30 => 30 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=MzA4ODI5MzY0Mw==&mid=2247547278&idx=1&sn=92b9a61025f8d604367c4f14e310f3c1&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号4 第2次请求 已阅读0 时间: 2025-12-01 15:35:49 金币: 30 => 30 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=Mzg5OTg1NTM5OA==&mid=2247528874&idx=1&sn=23295cd4c40108704cb825ce5303bbae&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号3 第7次请求 已阅读15 时间: 2025-12-02 13:37:35 金币: 1590 => 1590 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "aid": "b_wmulvewmulveulveulvawiwiwnwpulvbulvcwnulvewmwjulveulvdwlwmwkwmwmwiwlulvdulvculveulvewoulv0ulvculvgwpwmwiwowownwj",
-        "url": "https://mp.weixin.qq.com/s/055CkBUrbCOUuoySbD7KWg"
-    },
-    "code": 0,
-    "message": "success"
+        "link": "https://mp.weixin.qq.com/s?__biz=Mzg3NTA5MjkyNQ==&mid=2248493354&idx=3&sn=27d183d24ba632f7b1646e7558620471&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
 }
-
-===== 账号3 第8次请求 已阅读16 时间: 2025-12-02 13:37:55 金币: 1590 => 1590 =====
 {
+    "errcode": 0,
+    "msg": "success",
     "data": {
-        "info": "检测到您微信账号活跃度不足,建议您先去关注订阅号并多浏览订阅号内容以提升账号活跃度,请等待224分钟后再试"
-    },
-    "code": -9008,
-    "message": "阅读无效请耐心等待,请等待224分钟后再试"
+        "link": "https://mp.weixin.qq.com/s?__biz=MzI2Mjc1Mzk5Mg==&mid=2247657443&idx=1&sn=0dc649352cba9a4cc75fba4d77f709dc&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MjM5NDAyNTU4MA==&mid=2653443771&idx=1&sn=4cba643c4b5860c002820b46fdcf6856&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2651005820&idx=1&sn=01dd47108ab1d983d37b8b5a69f1f727&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzAxMjA1NDg4MQ==&mid=2651665939&idx=1&sn=f6ac29b4881eaa169610cbce2f3f5489&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzkwMzQyMDQ5Ng==&mid=2247544370&idx=1&sn=11bbed360018c1334f1ff579b71dc4d0&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=Mzg4NTU5OTY3NQ==&mid=2248075239&idx=1&sn=67db5aaf9c03b1f41882fa1e1dcb7fa6&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzAxOTA5Mjc2NQ==&mid=2652253384&idx=1&sn=c867cd6748b2f55f724bf99ee342a3f8&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MjM5NTc1OTA0OQ==&mid=2650557013&idx=1&sn=e78df244ba707b560f21d147382a0fd1&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MjM5NzQ3NzQ0MQ==&mid=2652025751&idx=1&sn=b336d25a3d0651c066759af4f50ba46a&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzA4OTQ3NDkyOA==&mid=2654049535&idx=1&sn=67ab16436c957ef6fd0a96316298b335&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzI4ODEzNjM5Ng==&mid=2650961984&idx=1&sn=a364ef03d86d9f8181f8afa2ddc5a10d&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzI2Mjc1Mzk5Mg==&mid=2247657443&idx=1&sn=0dc649352cba9a4cc75fba4d77f709dc&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MjM5NTg1NzA2NA==&mid=2658068863&idx=1&sn=9ecaf70317d1c14ee73e6594b4187209&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzIyMTE2OTMyNg==&mid=2659870251&idx=1&sn=9bb48032449af2385b6a31fd01cd28c0&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=Mzg5Mjc3NzQzMA==&mid=2247563048&idx=2&sn=3bcd8b79137727248fa6a52701b0ff1e&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzkyMTc0MDU5Nw==&mid=2247486180&idx=6&sn=5c82a12a6ddf04c2f9c36cba4aafb393&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 2
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=Mzg2Mzc2MzA0Mw==&mid=2247635769&idx=1&sn=cd9bad26bf4039b2e0621b98cb3b2f22&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzI5NDcxMDIzMA==&mid=2247982566&idx=1&sn=06cd4484f5280ea2f3fa7e31631cfb64&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 0,
+    "msg": "success",
+    "data": {
+        "link": "https://mp.weixin.qq.com/s?__biz=MzA3MzI4MjgzMw==&mid=2651005820&idx=1&sn=01dd47108ab1d983d37b8b5a69f1f727&scene=0#wechat_redirect",
+        "type": "read",
+        "a": 1
+    }
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/GYIA-y6HYl7u4tLuG1jNVg",
+        "sums": 25,
+        "readNum": 0
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/s3TxP5MLED_BowTvj_M5Cg",
+        "sums": 25,
+        "readNum": 3
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/6abPESbY0s8prTCZg5RNTg",
+        "sums": 25,
+        "readNum": 4
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/iTz595pkVcQO5C6WnFZE_Q",
+        "sums": 25,
+        "readNum": 5
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/RBP4tup4cQhjwMQcRfF2kA",
+        "sums": 25,
+        "readNum": 6
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/oXFkEgi9sRbYf9Mm_okuCw",
+        "sums": 25,
+        "readNum": 7
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/4SUfPaxReehC32U9HfsEIg",
+        "sums": 25,
+        "readNum": 8
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/hkKg8gfyEGdVZ06zNRAGSQ",
+        "sums": 25,
+        "readNum": 9
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/d_jvdhS030lX-433ZDqQgg",
+        "sums": 25,
+        "readNum": 10
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/5nnEWiZpLFs5jcyxvv9zxA",
+        "sums": 25,
+        "readNum": 11
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/PLoAPZehBVzU9GXb5elxKg",
+        "sums": 25,
+        "readNum": 12
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/2d8yMl4Bhypc-kSCMeT0-A",
+        "sums": 25,
+        "readNum": 13
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/PFLFYf7ZypreoBCHwKudeg",
+        "sums": 25,
+        "readNum": 14
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/WxejexYX09WvDttvevrYew",
+        "sums": 25,
+        "readNum": 15
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/hVSu1dTVT9ZWLwPUxNjYLQ",
+        "sums": 25,
+        "readNum": 16
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/BtrqDwC9xUGz3Yz6HCBSCA",
+        "sums": 25,
+        "readNum": 17
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/VRnY_UKQbYRCuhysm4GOVg",
+        "sums": 25,
+        "readNum": 18
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/GQosQftapLN22N3Jrj9FgQ",
+        "sums": 25,
+        "readNum": 19
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/PO92Ubp2tN3s5SMaEXIuLA",
+        "sums": 25,
+        "readNum": 20
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/70sJCFh4dWORI7KMvfOiaQ",
+        "sums": 25,
+        "readNum": 21
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/dHA-fnmjMNa9QFEWBEWSNQ",
+        "sums": 25,
+        "readNum": 22
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/11CBZI4Ikodez3E-Dz9g7g",
+        "sums": 25,
+        "readNum": 23
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/LOA6rxbvCM80-0e_d5lo3w",
+        "sums": 25,
+        "readNum": 24
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/jp1DBguFWQUSjv28FPyUzA",
+        "sums": 25,
+        "readNum": 25
+    }
+}
+{
+    "code": 500,
+    "message": "您已完成阅读，175积分奖励已发放！",
+    "data": []
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/s3TxP5MLED_BowTvj_M5Cg",
+        "sums": 25,
+        "readNum": 3
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/6abPESbY0s8prTCZg5RNTg",
+        "sums": 25,
+        "readNum": 4
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/iTz595pkVcQO5C6WnFZE_Q",
+        "sums": 25,
+        "readNum": 5
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/RBP4tup4cQhjwMQcRfF2kA",
+        "sums": 25,
+        "readNum": 6
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/WdElfpGlorO3wDgj_iCflg",
+        "sums": 25,
+        "readNum": 7
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/oXFkEgi9sRbYf9Mm_okuCw",
+        "sums": 25,
+        "readNum": 8
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/4SUfPaxReehC32U9HfsEIg",
+        "sums": 25,
+        "readNum": 9
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/hkKg8gfyEGdVZ06zNRAGSQ",
+        "sums": 25,
+        "readNum": 10
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/skLaN_9sGqsDE0A139NsBQ",
+        "sums": 25,
+        "readNum": 11
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/d_jvdhS030lX-433ZDqQgg",
+        "sums": 25,
+        "readNum": 12
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/5nnEWiZpLFs5jcyxvv9zxA",
+        "sums": 25,
+        "readNum": 13
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/W69koOs6x4AhVJ-g1Vqy-g",
+        "sums": 25,
+        "readNum": 14
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/GKYA4QwJYgocngFRSgYewg",
+        "sums": 25,
+        "readNum": 15
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/2OQN-iC_v1UMCtnGV9Dceg",
+        "sums": 25,
+        "readNum": 16
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/8rXBgXQflmbM57ke5Q6kDw",
+        "sums": 25,
+        "readNum": 17
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/WYbMxjHDYH6z3TmnSJhYww",
+        "sums": 25,
+        "readNum": 18
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/r5lY7zVRdnpaEuXM-7PyZA",
+        "sums": 25,
+        "readNum": 19
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/EpUNfGPtsjjKnl76ckXmZQ",
+        "sums": 25,
+        "readNum": 20
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/fydHXgk1fsZcuRRkbO3b0A",
+        "sums": 25,
+        "readNum": 21
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/H17P9NpgiGOD-5H57W4VvA",
+        "sums": 25,
+        "readNum": 22
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/uH88iHodzssQG-hdMBTMJg",
+        "sums": 25,
+        "readNum": 23
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/52V2p4yawuerkNnn5kWerw",
+        "sums": 25,
+        "readNum": 24
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/BtrqDwC9xUGz3Yz6HCBSCA",
+        "sums": 25,
+        "readNum": 25
+    }
+}
+{
+    "code": 500,
+    "message": "您已完成阅读，175积分奖励已发放！",
+    "data": []
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/WdElfpGlorO3wDgj_iCflg",
+        "sums": 25,
+        "readNum": 3
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/oXFkEgi9sRbYf9Mm_okuCw",
+        "sums": 25,
+        "readNum": 4
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/4SUfPaxReehC32U9HfsEIg",
+        "sums": 25,
+        "readNum": 5
+    }
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/4SUfPaxReehC32U9HfsEIg",
+        "sums": 25,
+        "readNum": 5
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/hkKg8gfyEGdVZ06zNRAGSQ",
+        "sums": 25,
+        "readNum": 6
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/skLaN_9sGqsDE0A139NsBQ",
+        "sums": 25,
+        "readNum": 7
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/5nnEWiZpLFs5jcyxvv9zxA",
+        "sums": 25,
+        "readNum": 8
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/4CSwdQnlZeOcg4cbkadRVg",
+        "sums": 25,
+        "readNum": 9
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/2ZLGNkBfLxwOJjF9sDXP3A",
+        "sums": 25,
+        "readNum": 10
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/NL6xXrhy0FZ8vgcu52o4iw",
+        "sums": 25,
+        "readNum": 11
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/MK-FfOWSar2nTdqPxHspIQ",
+        "sums": 25,
+        "readNum": 12
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/AX90qEp5CKXI2-q6nLQ5SQ",
+        "sums": 25,
+        "readNum": 13
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/jw_gmDW4zdjTOWhlxI_SWQ",
+        "sums": 25,
+        "readNum": 14
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/WYbMxjHDYH6z3TmnSJhYww",
+        "sums": 25,
+        "readNum": 15
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/wZ9N8GNQe1EmR_DcRmxABA",
+        "sums": 25,
+        "readNum": 16
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/W2GIY3urhS-VUUFN7YkEig",
+        "sums": 25,
+        "readNum": 17
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/-K4rQCLXIyEaSZ_tmyJvPw",
+        "sums": 25,
+        "readNum": 18
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/GnXVSQV0heDJRNf7ektEsg",
+        "sums": 25,
+        "readNum": 19
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/PjHzQPP_lbXNBaasycHVOg",
+        "sums": 25,
+        "readNum": 20
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/ZcOrsjVp95rji3EBcZ0Elg",
+        "sums": 25,
+        "readNum": 21
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/PfQCgZtXdiZ_mx2ZKcR6eg",
+        "sums": 25,
+        "readNum": 22
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/L5J7gXUYNZ8MSVjQa0OtPw",
+        "sums": 25,
+        "readNum": 23
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/GW8TfW2i4vJixgjxvQT8-w",
+        "sums": 25,
+        "readNum": 24
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/BG4kIF9t3BHbuF_2We7vIA",
+        "sums": 25,
+        "readNum": 25
+    }
+}
+{
+    "code": 500,
+    "message": "您已完成阅读，175积分奖励已发放！",
+    "data": []
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/oXFkEgi9sRbYf9Mm_okuCw",
+        "sums": 25,
+        "readNum": 2
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/4SUfPaxReehC32U9HfsEIg",
+        "sums": 25,
+        "readNum": 3
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/hkKg8gfyEGdVZ06zNRAGSQ",
+        "sums": 25,
+        "readNum": 4
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/skLaN_9sGqsDE0A139NsBQ",
+        "sums": 25,
+        "readNum": 5
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/5nnEWiZpLFs5jcyxvv9zxA",
+        "sums": 25,
+        "readNum": 6
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/6YpdZsR5LHmRCWETkJ4HQg",
+        "sums": 25,
+        "readNum": 7
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/X9iOstgWM2FWsftUOYRgpg",
+        "sums": 25,
+        "readNum": 8
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/P9YnucaPSO0peQO_qzXCKA",
+        "sums": 25,
+        "readNum": 9
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/ebnguObP0YowkkQDdvOwBw",
+        "sums": 25,
+        "readNum": 10
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/rdEzQc_T0OVx7v_4EluyEQ",
+        "sums": 25,
+        "readNum": 11
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/YlA41x1niAtPFQ9a9cLVbw",
+        "sums": 25,
+        "readNum": 12
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/eN554ybE1X2nUUyh9AVOwQ",
+        "sums": 25,
+        "readNum": 13
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/QIXqKQFzyRVY3hKR4wpW0Q",
+        "sums": 25,
+        "readNum": 14
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/QH8w_GJ5ufyFehPQPUfBdw",
+        "sums": 25,
+        "readNum": 15
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/oqFRjH1PV4g2WZqq7nyMyw",
+        "sums": 25,
+        "readNum": 16
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/52V2p4yawuerkNnn5kWerw",
+        "sums": 25,
+        "readNum": 17
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/SbcXSWmOJ5jbz5J9H236KQ",
+        "sums": 25,
+        "readNum": 18
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/DXCFIad5iGwNueNZ00KDoQ",
+        "sums": 25,
+        "readNum": 19
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/kvphjaNg-4MWiasxrMl7Qg",
+        "sums": 25,
+        "readNum": 20
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/c-g0e1O3AE8MLLhtFLk_WQ",
+        "sums": 25,
+        "readNum": 21
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/d4iOMXbYs7c0BAizeUhRjw",
+        "sums": 25,
+        "readNum": 22
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/F-tLXY143JNydDFoplY6OQ",
+        "sums": 25,
+        "readNum": 23
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/m5SD_YvBc_cCnT4Y88uU2Q",
+        "sums": 25,
+        "readNum": 24
+    }
+}
+{
+    "code": 200,
+    "message": "ok",
+    "data": {
+        "url": "https://mp.weixin.qq.com/s/0LehB3eHB7WzjIRxq-Gfug",
+        "sums": 25,
+        "readNum": 25
+    }
+}
+{
+    "code": 500,
+    "message": "您已完成阅读，175积分奖励已发放！",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "code": 500,
+    "message": "链接错误",
+    "data": []
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
+}
+{
+    "errcode": 407,
+    "msg": "今日阅读已达上限，试试其他任务吧！"
 }

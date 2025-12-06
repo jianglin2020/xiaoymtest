@@ -76,6 +76,7 @@ class GoldCollector:
 
     def is_10_days_before(self, target_str="1990-01-01 16:01"):
         """检查目标日期是否是当前日期的前10天"""
+        
         try:
             target = datetime.strptime(target_str, "%Y-%m-%d %H:%M")
             return target < datetime.now() - timedelta(days=10)
@@ -86,10 +87,11 @@ class GoldCollector:
         """从HTML中提取关键参数"""
         # 提取时间
         create_time_match = re.search(r"var createTime\s*=\s*['\"](.*?)['\"]", html_content)
-
         if create_time_match:
             self.create_time = create_time_match.group(1)
             print(self.create_time)  # 输出: 2025-04-19 18:08
+        else:
+            self.create_time = '1990-01-01 16:01'
 
         # 匹配 class 包含 `wx_tap_link js_wx_tap_highlight weui-wa-hotarea` 的 `<a>` 标签文本
         author_match = re.search(r'<a[^>]*class="[^"]*\bwx_tap_link\b[^"]*\bjs_wx_tap_highlight\b[^"]*\bweui-wa-hotarea\b[^"]*"[^>]*>([^<]+)</a>', html_content)
