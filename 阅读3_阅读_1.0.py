@@ -121,55 +121,46 @@ class GoldCollector:
             return None 
 
     # 提现初始
-    def get_initial_page(self):
+    def get_initial_page(self, result):
         """获取初始页面并解析关键参数"""
-        url = f"{self.base_url}/yunonline/v1/{self.full_exchange_part}"
-        response = self.session.get(url, headers=self.headers, cookies=self.cookies)
+        # url = f"{self.base_url}/yunonline/v1/{self.full_exchange_part}"
+        # response = self.session.get(url, headers=self.headers, cookies=self.cookies)
 
-        # 保存到当前目录的 response.txt
-        with open("response.html", "w", encoding="utf-8") as f:
-            f.write(response.text)
-        # 获取提现参数
-        self.extract_params_from_html(response.text)
+        # # 保存到当前目录的 response.txt
+        # with open("response.html", "w", encoding="utf-8") as f:
+        #     f.write(response.text)
+        # # 获取提现参数
+        # self.extract_params_from_html(response.text)
 
-        goid = self.get_gold_balance()
+        goid = self.get_gold_balance(result)
 
-        if int(goid) >= 5000:
+        if int(goid) >= 1000:
             # 提现
             print(f"🎉 开始提现到微信！")
             self.withdraw_to_wechat()
         else:
-            print('🎉 金币不足5000!')
+            print('🎉 金币不足1000!')
         print("内容已保存到 response.html")
-        return response.text
+        # return response.text
 
     # 提现到微信
     def withdraw_to_wechat(self):
         """提现到微信钱包"""
-        url = urljoin(self.domain, "withdraw")
-
-        print(url)
-        data = {
-            "unionid": self.unionid,
-            "signid": self.request_id,
-            "ua": '2',
-            "ptype": "0",  # 0表示微信
-            "paccount": "",
-            "pname": "" 
-        }
+        url = f'{self.base_url}/h5_share/user/withdraw'
 
         try:
             response = self.session.post(
-                url, 
-                data=data,
+                url,
                 headers=self.headers,
-                cookies={'ysmuid': self.account["ysmuid"]},  # 直接使用值，不要外加 {}
-                timeout=15)
-            if response.json().get("errcode") == 0:
+                data={},
+                timeout=20
+            )
+            print(response.json())
+            if response.json().get("code") == 200:
                 print("微信提现成功！请返回微信查看")
                 return True
             else:
-                print(f"微信提现失败: {response.json().get('msg', '未知错误')}")
+                print(f"微信提现失败: {response.json().get('message', '未知错误')}")
                 return False
         except Exception as e:
             print(f"微信提现请求失败: {str(e)}")
@@ -185,7 +176,7 @@ class GoldCollector:
                 data = result.get('data', {})
                 print(f"🎉 昵称：{data['nickname']}")
                 print(f"🎉 金币剩余：{data['points'] - data['used_points']}")
-                return {data['points'] - data['points']}
+                return data['points'] - data['used_points']
             else:
                 print(f"获取余额失败: {result.get('msg', '未知错误')}")
                 return None
@@ -303,7 +294,7 @@ class GoldCollector:
                 print("领取奖励失败:", reward_data.get('message', '未知错误'))
   
         # 提现
-        # self.get_initial_page()
+        # self.get_initial_page(result)
 
 if __name__ == "__main__":
     def process_account(account):
