@@ -22,17 +22,22 @@ def load_config(config_path='config.yaml'):
 load_config() 
 
 qwbotkey = config['qwbotkey']
-xyy_config = config['xyy_config']
+mtz_config = config['mtz_config']
 
 
 class GoldCollector:
     def __init__(self, account):
         self.session = requests.Session()
         self.account = account
-        # self.base_url = 'http://1747913911te.cgwgov.cn'
-        self.base_url = 'http://22d43-fef6.red22.top'
-        self.headers = {'User-Agent': random.choice(config['ua_list'])}
-        self.cookies = {'ejectCode': '1', 'ysmuid': account["ysmuid"]}
+        # self.base_url = 'http://1747921943te.aaik2kk8693.cn'
+        self.base_url = 'https://api2.wanjd.cn'
+
+        self.headers = {
+            'User-Agent': random.choice(config['ua_list']),
+            'authorization': account["ck"],
+        }
+
+        # self.cookies = {'ejectCode': '1', 'ysmuid': account["ysmuid"]}
 
     def sleep_with_countdown(self, sleep_time):
         """带倒计时显示的sleep"""
@@ -60,29 +65,29 @@ class GoldCollector:
     
     # 获取 domain_url
     def get_domain_url(self):
-        url = f"{self.base_url}/xyysofttmplik"
-        data = {
-            'unionid': self.account['unionid'],
-        }
+
+        url = f"{self.base_url}/h5_share/daily/get_read"
 
         try:
             response = self.session.post(
                 url,
                 headers=self.headers,
-                data=data,
-                cookies=self.cookies,
+                data={},
                 timeout=20
             )
             response.raise_for_status()
             result = response.json()
 
-            if result.get('errcode') == 0:
-                data = result.get('data', {})
-                print(f"🚗 domain地址：{data['domain']}")
+            print(result)
 
-                return result.get('data', {}).get('domain', '')
+            if result.get('code') == 200:
+                data = result.get('data', {})
+
+                url = re.search(r'http[^\s<>"]+', data['copyContent']).group(0)
+                print(f"🚗 domain地址：{url}")
+                return url
             else:
-                print(f"获取失败: {result.get('msg', '未知错误')}")
+                print(f"获取失败: {result.get('message', '未知错误')}")
                 return None
                     
         except requests.exceptions.RequestException as e:
@@ -91,29 +96,25 @@ class GoldCollector:
 
     def get_sign_info(self):
         """获取初始页面并解析关键参数"""
-        url = f"{self.base_url}"
-        params = {
-           'inviteid': 0
-        }
-
+        url = f"{self.base_url}/h5_share/user/info"
         try:
-            response = self.session.get(
+            response = self.session.post(
                 url,
                 headers=self.headers,
-                params=params,
-                cookies={'ysmuid': self.account["ysmuid"]},  # 直接使用值，不要外加 {}
+                params={"d":1},
                 timeout=20
             )
             response.raise_for_status()
             if response.status_code == 200: 
-                text = response.text
-                print(f"🎉 登陆成功") 
-                pattern = r"(exchange\?.+?)['\"]"
-                match = re.search(pattern, text)
+                # print(f"🎉 登陆成功") 
+                return response.json()
+                # pattern = r"(exchange\?.+?)['\"]"
+                # match = re.search(pattern, text)
 
-                if match:
-                    full_exchange_part = match.group(1)
-                    self.full_exchange_part = full_exchange_part
+                # if match:
+                #     full_exchange_part = match.group(1)
+                #     self.full_exchange_part = full_exchange_part
+                #     print(full_exchange_part)   
 
         except requests.exceptions.RequestException as e:
             print(f"请求异常: {str(e)}")
@@ -123,7 +124,6 @@ class GoldCollector:
     def get_initial_page(self):
         """获取初始页面并解析关键参数"""
         url = f"{self.base_url}/yunonline/v1/{self.full_exchange_part}"
-
         response = self.session.get(url, headers=self.headers, cookies=self.cookies)
 
         # 保存到当前目录的 response.txt
@@ -137,60 +137,34 @@ class GoldCollector:
         if int(goid) >= 5000:
             # 提现
             print(f"🎉 开始提现到微信！")
-            self.get_user_gold()
             self.withdraw_to_wechat()
         else:
             print('🎉 金币不足5000!')
         print("内容已保存到 response.html")
         return response.text
 
-    # 金币转余额
-    def get_user_gold(self):
-        """金币转余额"""
-        # url = urljoin(self.domain, "withdraw")
-        url = f"{self.base_url}/yunonline/v1/user_gold"
-
-        data = f"unionid={self.unionid}&request_id={self.request_id}&gold=5000"
-
-        headers = {
-            'User-Agent': random.choice(config['ua_list']),
-            'Accept': "application/json, text/javascript, */*; q=0.01",
-            'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8"
-        }
-
-        response = self.session.post(
-            url, 
-            data=data,
-            headers=headers,
-            cookies={'ysmuid': self.account["ysmuid"]},  # 直接使用值，不要外加 {}
-            timeout=15)
-
-        print(response.json())    
-       
-
     # 提现到微信
     def withdraw_to_wechat(self):
         """提现到微信钱包"""
-        # url = urljoin(self.domain, "withdraw")
-        url = f"{self.base_url}/yunonline/v1/withdraw"
+        url = urljoin(self.domain, "withdraw")
 
-        data = f"unionid={self.unionid}&signid={self.request_id}&ua=0&ptype=0&paccount=&pname="
-
-        headers = {
-            'User-Agent': random.choice(config['ua_list']),
-            'Accept': "application/json, text/javascript, */*; q=0.01",
-            'Content-Type': "application/x-www-form-urlencoded; charset=UTF-8"
+        print(url)
+        data = {
+            "unionid": self.unionid,
+            "signid": self.request_id,
+            "ua": '2',
+            "ptype": "0",  # 0表示微信
+            "paccount": "",
+            "pname": "" 
         }
 
         try:
             response = self.session.post(
                 url, 
                 data=data,
-                headers=headers,
+                headers=self.headers,
                 cookies={'ysmuid': self.account["ysmuid"]},  # 直接使用值，不要外加 {}
                 timeout=15)
-
-            print(response.json())    
             if response.json().get("errcode") == 0:
                 print("微信提现成功！请返回微信查看")
                 return True
@@ -201,33 +175,17 @@ class GoldCollector:
             print(f"微信提现请求失败: {str(e)}")
             return False
 
-    def get_gold_balance(self):
+    def get_gold_balance(self, result):
         """获取金币余额"""
-        url = f"{self.base_url}/yunonline/v1/gold"
-
-        params = {
-            'unionid': self.account['unionid'],
-            'time': int(time.time() * 1000)  # 生成13位时间戳
-        }
 
         try:
-            response = self.session.get(
-                url,
-                headers=self.headers,
-                params=params,
-                cookies={'ysmuid': self.account["ysmuid"]},  # 直接使用值，不要外加 {}
-                timeout=20
-            )
-            response.raise_for_status()
-            result = response.json()
 
             print(result)
-            if result.get('errcode') == 0:
+            if result.get('code') == 200:
                 data = result.get('data', {})
-                print(f"🎉 今日阅读：{data['day_read']}")
-                print(f"🎉 金币剩余：{data['last_gold']}")
-                print(f"🎉 今日奖励：{data['day_gold']}")
-                return result.get('data', {}).get('last_gold', 0)
+                print(f"🎉 昵称：{data['nickname']}")
+                print(f"🎉 金币剩余：{data['points'] - data['used_points']}")
+                return {data['points'] - data['points']}
             else:
                 print(f"获取余额失败: {result.get('msg', '未知错误')}")
                 return None
@@ -236,23 +194,21 @@ class GoldCollector:
             print(f"请求异常: {str(e)}")
             return None
 
+
     def request_article(self, domain_url):
         """请求文章链接"""
-        
-        # 1. 提取 xsyfew 的值
-        self.xsyfew = domain_url.split("xsyfew=")[1].split("&")[0]
-        timestamp = int(time.time() * 1000)
+        url = f'{self.base_url}/wxread/articles/ad'
 
-        # 2. 构建新的 URL
-        new_url = (
-            domain_url.split("?")[0] 
-            .replace("/qnamiuy", "/rexyyafd")
-            + f"?xsyfew={self.xsyfew}&time={timestamp}&psgn=168&vs=1002"                
-        )
+        data = f"href={domain_url}"
 
-        print(new_url)
-        response = self.session.get(new_url, headers=self.headers)
-        print(response.json())
+        headers = {
+            'User-Agent': random.choice(config['ua_list']),
+            'Content-Type': "application/x-www-form-urlencoded",
+            'origin': "http://a.xian491.xyz"
+        }
+
+        response = self.session.post(url, data=data, headers=headers)
+        print(response)
         if response.status_code == 200: 
             with open('output.json', 'a', encoding='utf-8') as f:
                 json.dump(response.json(), f, ensure_ascii=False, indent=4)
@@ -261,21 +217,28 @@ class GoldCollector:
     
     def simulate_reading(self, article_data):
         """模拟阅读行为"""
-        read_seconds = random.randint(8, 12)
+        read_seconds = random.randint(6, 8)
 
-        if article_data.get('a') != 1:
-            self.send_message(article_data.get('link'))
+        if article_data.get('readNum') == 0:
+            self.send_message(article_data.get('url'))
         else:
             print(f"正在模拟阅读 {read_seconds} 秒...")
             time.sleep(read_seconds)
         return int(time.time())
     
-    def claim_reward(self, read_time):
+    def claim_reward(self, domain_url):
         """领取金币奖励"""
-        timestamp = int(time.time() * 1000)
-        api_url = f"{self.base_url}/jinbicp?xsyfew={self.xsyfew}&time={read_time}&timestamp={timestamp}"
+        url = f"{self.base_url}/wxread/articles/three_read"
 
-        response = self.session.get(api_url, headers=self.headers)
+        data = f"href={domain_url}"
+
+        headers = {
+            'User-Agent': random.choice(config['ua_list']),
+            'Content-Type': "application/x-www-form-urlencoded",
+            'origin': "http://a.xian491.xyz"
+        }
+
+        response = self.session.post(url, data=data, headers=headers)
         if response.status_code == 200:
             return response.json()
         return None
@@ -296,29 +259,32 @@ class GoldCollector:
             }
             headers = {'Content-Type': 'application/json'}
             response = requests.post(url, headers=headers, data=json.dumps(data))
-            print("以将该文章推送至微信请在60s内点击链接完成阅读--60s后继续运行")
+            print("以将该文章推送至微信请在30s内点击链接完成阅读--30s后继续运行")
             # 使用示例
-            self.sleep_with_countdown(60)
+            self.sleep_with_countdown(30)
 
     
     def run(self):
         """执行完整流程"""
         # 登陆
-        self.get_sign_info()
+        result = self.get_sign_info()
 
         # 查询金币
-        self.get_gold_balance()
+        self.get_gold_balance(result)
 
         # 获取domain_url
         domain_url = self.get_domain_url()
 
+        print(domain_url)
+
         # 执行任务
-        for i in range(30):
+        for i in range(4):
             print(f"------{self.account['name']}_正在第{i+1}次阅读------")
             # 请求文章
             article_data = self.request_article(domain_url)
-            if not article_data or article_data.get('errcode') != 0:
-                print("获取文章失败:", article_data.get('msg', '未知错误'))
+            print(article_data)
+            if not article_data or article_data.get('code') != 200:
+                print("获取文章失败:", article_data.get('message', '未知错误'))
                 break
 
             # 模拟阅读
@@ -328,34 +294,34 @@ class GoldCollector:
             read_duration = end_time - start_time
             
             # 领取奖励
-            reward_data = self.claim_reward(read_duration)
-            if reward_data and reward_data.get('errcode') == 0:
-                gold = reward_data['data']['gold']
+            reward_data = self.claim_reward(domain_url)
+            if reward_data and reward_data.get('code') == 200:
+                # gold = reward_data['data']['gold']
                 print(reward_data)
-                print(f"🎉 成功获得 {gold} 金币!")
+                print(f"🎉 成功获得金币!")
             else:
-                print("领取奖励失败:", reward_data.get('msg', '未知错误'))
+                print("领取奖励失败:", reward_data.get('message', '未知错误'))
   
         # 提现
-        self.get_initial_page()
+        # self.get_initial_page()
 
 if __name__ == "__main__":
-    def process_account(account):
-        print(f"\n=======开始执行{account['name']}=======")
-        print(account['name'], account['unionid'])
-        collector = GoldCollector(account)
-        collector.run()
-
-    # 创建线程池
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        for account in xyy_config['xyyck']:
-            executor.submit(process_account, account)
-            time.sleep(30)  # 线程间隔30秒
-    
-    # 遍历所有账号
-    # for account in xyy_config['xyyck']:
-    #     # 输出当前正在执行的账号
+    # def process_account(account):
     #     print(f"\n=======开始执行{account['name']}=======")
-    #     print(account['name'], account['unionid'])
+    #     print(account['name'], account['ck'])
     #     collector = GoldCollector(account)
     #     collector.run()
+
+    # # 创建线程池
+    # with ThreadPoolExecutor(max_workers=4) as executor:
+    #     for account in mtz_config['mtzck']:
+    #         executor.submit(process_account, account)
+    #         # time.sleep(60)  # 线程间隔60秒
+    
+    # 遍历所有账号
+    for account in mtz_config['mtzck']:
+        # 输出当前正在执行的账号
+        print(f"\n=======开始执行{account['name']}=======")
+        print(account['name'], account['ck'])
+        collector = GoldCollector(account)
+        collector.run()
