@@ -238,7 +238,7 @@ class GoldCollector:
         print(f"{self.account['name']}_发现目标疑似检测文章！！！")
         url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=' + qwbotkey
         messages = [
-            f"{self.account['name']}_出现检测文章！！！\n{link}\n请在60s内点击链接完成阅读",
+            f"{self.account['name']}_出现检测文章！！！\n{link}\n请在30s内点击链接完成阅读",
         ]
 
         for message in messages:
@@ -307,7 +307,7 @@ if __name__ == "__main__":
     with ThreadPoolExecutor(max_workers=4) as executor:
         for account in mtz_config['mtzck']:
             executor.submit(process_account, account)
-            # time.sleep(60)  # 线程间隔60秒
+            time.sleep(10)  # 线程间隔10秒
     
     # 遍历所有账号
     # for account in mtz_config['mtzck']:

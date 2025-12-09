@@ -72,8 +72,8 @@ def quark_link(name):
         {'name': '玩偶', 'url': 'https://wogg.xxooo.cf'},
         {'name': '至臻', 'url': 'https://xiaomi666.fun'},
         {'name': '蜡笔', 'url': 'https://feimao666.fun'},
-        # {'name': '虎斑', 'url': 'http://103.45.162.207:20720'},
-        # {'name': '二小', 'url': 'http://www.2xiaopan.fun'}
+        {'name': '虎斑', 'url': 'http://103.45.162.207:20720'},
+        {'name': '二小', 'url': 'http://erxiaofn.click'}
     ]
 
     # 1. 抓取数据

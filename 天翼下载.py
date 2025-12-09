@@ -395,10 +395,11 @@ class TianyiDownloader:
 
 if __name__ == "__main__":
     # 在这里直接输入分享链接
+    # 查看大生意人29、30集字幕
     share_list = [
       {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-      {'name': '大生意人', 'url': 'https://cloud.189.cn/web/share?code=iYNBzuURNFne'},
-      {'name': '枭起青壤', 'url': 'https://cloud.189.cn/web/share?code=E7JF3aVzm2Yr'},
+      {'name': '大生意人', 'url': 'https://cloud.189.cn/web/share?code=AnUNF3V3m6nu'},
+      {'name': '狙击蝴蝶', 'url': 'https://cloud.189.cn/web/share?code=fM7RBjQ7JrIb'},
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')
