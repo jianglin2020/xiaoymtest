@@ -294,7 +294,7 @@ class GoldCollector:
                 print("领取奖励失败:", reward_data.get('message', '未知错误'))
   
         # 提现
-        # self.get_initial_page(result)
+        self.get_initial_page(result)
 
 if __name__ == "__main__":
     def process_account(account):
@@ -307,7 +307,7 @@ if __name__ == "__main__":
     with ThreadPoolExecutor(max_workers=4) as executor:
         for account in mtz_config['mtzck']:
             executor.submit(process_account, account)
-            time.sleep(10)  # 线程间隔10秒
+            time.sleep(60)  # 线程间隔60秒
     
     # 遍历所有账号
     # for account in mtz_config['mtzck']:

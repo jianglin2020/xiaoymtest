@@ -29,8 +29,9 @@ class GoldCollector:
     def __init__(self, account):
         self.session = requests.Session()
         self.account = account
-        # self.base_url = 'http://1747913911te.cgwgov.cn'
-        self.base_url = 'http://22d43-fef6.red22.top'
+        # self.base_url = 'http://22d43-fef6.red22.top'
+        self.base_url = 'http://sr1206.3b3d0b936.okapdf089.asia'
+
         self.headers = {'User-Agent': random.choice(config['ua_list'])}
         self.cookies = {'ejectCode': '1', 'ysmuid': account["ysmuid"]}
 
@@ -238,7 +239,8 @@ class GoldCollector:
 
     def request_article(self, domain_url):
         """请求文章链接"""
-        
+        # http://sr1206.3b3d0b936.okapdf089.asia/siyxaygty?xsyfew=026513654eead334c509b0632cb651ba&time=1765338846000&psgn=168&vs=1002
+
         # 1. 提取 xsyfew 的值
         self.xsyfew = domain_url.split("xsyfew=")[1].split("&")[0]
         timestamp = int(time.time() * 1000)
@@ -246,7 +248,7 @@ class GoldCollector:
         # 2. 构建新的 URL
         new_url = (
             domain_url.split("?")[0] 
-            .replace("/qnamiuy", "/rexyyafd")
+            .replace("/x20251113ys", "/siyxaygty")
             + f"?xsyfew={self.xsyfew}&time={timestamp}&psgn=168&vs=1002"                
         )
 
@@ -261,7 +263,7 @@ class GoldCollector:
     
     def simulate_reading(self, article_data):
         """模拟阅读行为"""
-        read_seconds = random.randint(8, 12)
+        read_seconds = random.randint(7, 9)
 
         if article_data.get('a') != 1:
             self.send_message(article_data.get('link'))
