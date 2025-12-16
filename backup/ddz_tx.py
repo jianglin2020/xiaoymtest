@@ -41,8 +41,8 @@ for account in accounts:
       "money": 0.5,
       "kou_credit": 5000,
       "tx_type": "2",
-      "ali_name": "关壮壮",
-      "ali_account": 15311216972
+      "ali_name": "xxx",
+      "ali_account": '153xxxx6972'
   }
 
   response = requests.post(url, headers=headers, data=data)

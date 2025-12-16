@@ -162,8 +162,10 @@ def main():
 
   # 运行选择
   selected_item = select_item([
-    {'name': '大生意人', 'type': 1},
     {'name': '狙击蝴蝶', 'type': 1},
+    {'name': '风与潮', 'type': 1},
+    {'name': '长安二十四计', 'type': 1},
+    {'name': '双轨', 'type': 1},
     {'name': '奔跑吧', 'type': 2},
     {'name': '森林进化论', 'type': 2},
     {'name': '现在就出发', 'type': 2},

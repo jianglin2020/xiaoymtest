@@ -252,7 +252,7 @@ class GoldCollector:
             response = requests.post(url, headers=headers, data=json.dumps(data))
             print("以将该文章推送至微信请在30s内点击链接完成阅读--30s后继续运行")
             # 使用示例
-            self.sleep_with_countdown(30)
+            self.sleep_with_countdown(20)
 
     
     def run(self):
@@ -307,7 +307,7 @@ if __name__ == "__main__":
     with ThreadPoolExecutor(max_workers=4) as executor:
         for account in mtz_config['mtzck']:
             executor.submit(process_account, account)
-            time.sleep(60)  # 线程间隔60秒
+            time.sleep(40)  # 线程间隔60秒
     
     # 遍历所有账号
     # for account in mtz_config['mtzck']:
