@@ -29,8 +29,8 @@ class GoldCollector:
     def __init__(self, account):
         self.session = requests.Session()
         self.account = account
-        # self.base_url = 'http://22d43-fef6.red22.top'
-        self.base_url = 'http://sr1206.3b3d0b936.okapdf089.asia'
+        # self.base_url = 'http://sr1206.3b3d0b936.okapdf089.asia'
+        self.base_url = 'http://5cd20cc.window-repair-200.site'
 
         self.headers = {'User-Agent': random.choice(config['ua_list'])}
         self.cookies = {'ejectCode': '1', 'ysmuid': account["ysmuid"]}
@@ -286,7 +286,7 @@ class GoldCollector:
         print(f"{self.account['name']}_发现目标疑似检测文章！！！")
         url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=' + qwbotkey
         messages = [
-            f"{self.account['name']}_出现检测文章！！！\n{link}\n请在40s内点击链接完成阅读",
+            f"{self.account['name']}_出现检测文章！！！\n{link}\n请在20s内点击链接完成阅读",
         ]
 
         for message in messages:
@@ -298,9 +298,9 @@ class GoldCollector:
             }
             headers = {'Content-Type': 'application/json'}
             response = requests.post(url, headers=headers, data=json.dumps(data))
-            print("以将该文章推送至微信请在40s内点击链接完成阅读--40s后继续运行")
+            print("以将该文章推送至微信请在20s内点击链接完成阅读--20s后继续运行")
             # 使用示例
-            self.sleep_with_countdown(40)
+            self.sleep_with_countdown(20)
 
     
     def run(self):
