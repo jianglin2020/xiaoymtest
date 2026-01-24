@@ -26,7 +26,7 @@ qwbotkey = config['qwbotkey']
 duoduo_config = config['duoduo_config']
 check_whitelist = config['check_whitelist']
 check_index = [1, 6, 13] # 第一轮
-check_index = [5, 12] # 第二轮
+check_today_index = [0, 4, 11, 27, 33, 40, 59, 67, 76, 89, 97]
 
 class GoldCollector:
     def __init__(self, account={}):
@@ -37,6 +37,8 @@ class GoldCollector:
         self.balance = 0 #初始化金币
         self.aid = ''
         self.create_time = ''
+        self.today_num = None
+
         self.headers = {'User-Agent': random.choice(config['ua_list'])}  # 随机ua
 
 
@@ -76,14 +78,14 @@ class GoldCollector:
             time.sleep(1)
         print(f"\r{self.account['name']}等待完成！" + " " * 20)  # 清除行尾
 
-    def is_10_days_before(self, target_str="1990-01-01 16:01"):
-        """检查目标日期是否是当前日期的前10天"""
+    # def is_10_days_before(self, target_str="1990-01-01 16:01"):
+    #     """检查目标日期是否是当前日期的前10天"""
         
-        try:
-            target = datetime.strptime(target_str, "%Y-%m-%d %H:%M")
-            return target < datetime.now() - timedelta(days=10)
-        except ValueError:
-            raise ValueError("日期格式必须为 YYYY-MM-DD HH:MM")
+    #     try:
+    #         target = datetime.strptime(target_str, "%Y-%m-%d %H:%M")
+    #         return target < datetime.now() - timedelta(days=10)
+    #     except ValueError:
+    #         raise ValueError("日期格式必须为 YYYY-MM-DD HH:MM")
     
     def extract_params_from_html(self, html_content):
         """从HTML中提取关键参数"""
@@ -113,18 +115,19 @@ class GoldCollector:
     def get_wx_page(self, wx_url):
         print('微信url', wx_url)
         """获取初始页面并解析关键参数"""
-        response = self.session.get(wx_url, headers=self.headers, timeout=20)
+        # response = self.session.get(wx_url, headers=self.headers, timeout=20)
 
-        # 保存到当前目录的 response.txt
-        with open("response.html", "w", encoding="utf-8") as f:
-            f.write(response.text)
+        # # 保存到当前目录的 response.txt
+        # with open("response.html", "w", encoding="utf-8") as f:
+        #     f.write(response.text)
         # 获取参数
-        self.extract_params_from_html(response.text)
+        # self.extract_params_from_html(response.text)
         read_seconds = random.randint(7, 8)
-    
-        if self.author_match in check_whitelist or self.index in check_index:
-            #10天以前的文章
-            self.send_message(wx_url)
+
+        # 在名单中且阅读量和上次不相同
+        print(f'今日：{self.today_num} 上次：{self.last_num} 本轮：{self.index}')   
+        if self.today_num in check_today_index and self.today_num != self.last_num:
+          self.send_message(wx_url)
         else:
             print(f"正在模拟阅读 {read_seconds} 秒...")
             time.sleep(read_seconds)
@@ -133,7 +136,7 @@ class GoldCollector:
         print(f"{self.account['name']}_发现目标疑似检测文章！！！")
         url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=' + qwbotkey
         messages = [
-            f"{self.account['name']}_出现检测文章！！！\n{link}\n请在60s内点击链接完成阅读",
+            f"{self.account['name']}_出现检测文章！！！\n{link}\n请在20s内点击链接完成阅读",
         ]
 
 
@@ -146,9 +149,9 @@ class GoldCollector:
             }
             headers = {'Content-Type': 'application/json'}
             response = requests.post(url, headers=headers, data=json.dumps(data))
-            print("以将该文章推送至微信请在60s内点击链接完成阅读--30s后继续运行")
+            print("以将该文章推送至微信请在20s内点击链接完成阅读--20s后继续运行")
             # 使用示例
-            self.sleep_with_countdown(30)
+            self.sleep_with_countdown(20)
             
     # 微信提现
     def withdraw_to_wechat(self):
@@ -229,6 +232,9 @@ class GoldCollector:
         if result.get('code') == 0:
             data = result.get('data', [])
             print(f"今日阅读量：{int(data['today_count'])}")
+            # 记录今日阅读量上次值和现在值
+            self.last_num = self.today_num
+            self.today_num = int(data['today_count'])
             return int(data['today_count'])
         else:
             # print(f"获取余额失败: {result.get('balance', '未知错误')}")
@@ -238,7 +244,7 @@ class GoldCollector:
     
     def send_requests(self):
         """发送30次请求的核心函数"""
-        for i in range(1, 31):
+        for i in range(1, 35):
             num = self.get_today_count() #今日阅读量
             self.index = i #本轮阅读量
             print(f"\n--- 第{i}次请求 已阅读{num}  ---")
@@ -253,6 +259,12 @@ class GoldCollector:
             # 查询金币
             last_balance = self.balance #上次的金币
             self.balance = self.get_balance() #本次的金币
+
+            if (self.balance - last_balance) == 0 and self.last_num and not self.last_num in check_today_index:
+                check_today_index.append(self.last_num)
+                print(check_today_index)
+
+
             # 写入JSON文件（追加模式）
             with open('output.json', 'a', encoding='utf-8') as f:
                 # 将JSON数据写入文件，禁用ASCII转码，使用4空格缩进

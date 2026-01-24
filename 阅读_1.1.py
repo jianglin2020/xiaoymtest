@@ -4,6 +4,7 @@ import time
 import yaml
 import json
 import re
+import sys
 from urllib.parse import urljoin
 from concurrent.futures import ThreadPoolExecutor
 
@@ -24,13 +25,21 @@ load_config()
 qwbotkey = config['qwbotkey']
 xyy_config = config['xyy_config']
 
+# 判断是否系统维护
+def is_maintenance():
+    url = f"http://t510514s.weifangqr.cn/jxybyy/6d288b175355d987746598c6c11c0227?mid=815"
+
+    response = requests.get(url,headers={'User-Agent': random.choice(config['ua_list'])},timeout=20)
+
+    """用bool()转换"""
+    return bool(re.search(r'系统维护中，近期价格低', response.text))
 
 class GoldCollector:
     def __init__(self, account):
         self.session = requests.Session()
         self.account = account
-        # self.base_url = 'http://sr1206.3b3d0b936.okapdf089.asia'
-        self.base_url = 'http://5cd20cc.window-repair-200.site'
+        # self.base_url = 'http://5cd20cc.window-repair-200.site'
+        self.base_url = 'http://375cbec.t3h1w6.cn'
 
         self.headers = {'User-Agent': random.choice(config['ua_list'])}
         self.cookies = {'ejectCode': '1', 'ysmuid': account["ysmuid"]}
@@ -58,10 +67,12 @@ class GoldCollector:
         request_id_match = re.search(r'var request_id\s*=\s*["\'](.*?)["\']', html_content)
         if request_id_match:
             self.request_id = request_id_match.group(1)
-    
+
     # 获取 domain_url
     def get_domain_url(self):
-        url = f"{self.base_url}/xyysofttmplik"
+        # url = f"{self.base_url}/xyysofttmplik"
+        url = f"{self.base_url}/xiaoxinxin/duliks"
+
         data = {
             'unionid': self.account['unionid'],
         }
@@ -79,9 +90,11 @@ class GoldCollector:
 
             if result.get('errcode') == 0:
                 data = result.get('data', {})
-                print(f"🚗 domain地址：{data['domain']}")
+                query_value = re.search(r'query=([^&]+)', data['domain']).group(1)
 
-                return result.get('data', {}).get('domain', '')
+                print(f"🚗 domain地址：{query_value}")
+
+                return query_value
             else:
                 print(f"获取失败: {result.get('msg', '未知错误')}")
                 return None
@@ -92,9 +105,10 @@ class GoldCollector:
 
     def get_sign_info(self):
         """获取初始页面并解析关键参数"""
-        url = f"{self.base_url}"
+        url = f"{self.base_url}/xiaoxinxin/home.html"
         params = {
-           'inviteid': 0
+          #'inviteid': 0
+          'ysi': 0
         }
 
         try:
@@ -123,13 +137,14 @@ class GoldCollector:
     # 提现初始
     def get_initial_page(self):
         """获取初始页面并解析关键参数"""
-        url = f"{self.base_url}/yunonline/v1/{self.full_exchange_part}"
+        # url = f"{self.base_url}/yunonline/v1/{self.full_exchange_part}"
+        url = f"{self.base_url}/xiaoxinxin/{self.full_exchange_part}"
 
         response = self.session.get(url, headers=self.headers, cookies=self.cookies)
 
         # 保存到当前目录的 response.txt
-        with open("response.html", "w", encoding="utf-8") as f:
-            f.write(response.text)
+        # with open("response.html", "w", encoding="utf-8") as f:
+        #     f.write(response.text)
         # 获取提现参数
         self.extract_params_from_html(response.text)
 
@@ -149,7 +164,7 @@ class GoldCollector:
     def get_user_gold(self):
         """金币转余额"""
         # url = urljoin(self.domain, "withdraw")
-        url = f"{self.base_url}/yunonline/v1/user_gold"
+        url = f"{self.base_url}/xiaoxinxin/user_gold"
 
         data = f"unionid={self.unionid}&request_id={self.request_id}&gold=5000"
 
@@ -173,7 +188,7 @@ class GoldCollector:
     def withdraw_to_wechat(self):
         """提现到微信钱包"""
         # url = urljoin(self.domain, "withdraw")
-        url = f"{self.base_url}/yunonline/v1/withdraw"
+        url = f"{self.base_url}/xiaoxinxin/withdraw"
 
         data = f"unionid={self.unionid}&signid={self.request_id}&ua=0&ptype=0&paccount=&pname="
 
@@ -204,7 +219,7 @@ class GoldCollector:
 
     def get_gold_balance(self):
         """获取金币余额"""
-        url = f"{self.base_url}/yunonline/v1/gold"
+        url = f"{self.base_url}/xiaoxinxin/gold"
 
         params = {
             'unionid': self.account['unionid'],
@@ -240,16 +255,18 @@ class GoldCollector:
     def request_article(self, domain_url):
         """请求文章链接"""
         # http://sr1206.3b3d0b936.okapdf089.asia/siyxaygty?xsyfew=026513654eead334c509b0632cb651ba&time=1765338846000&psgn=168&vs=1002
+        # http://f0104a35.kztbla.cn/xiaoxinxin/dudu?rid=3040d86e7b2f&time=1769147362000&psgn=168&vs=1002
 
-        # 1. 提取 xsyfew 的值
-        self.xsyfew = domain_url.split("xsyfew=")[1].split("&")[0]
+        # 1. 提取 rid 的值
+        self.rid = domain_url.split("rid=")[1].split("#")[0]
+
         timestamp = int(time.time() * 1000)
 
         # 2. 构建新的 URL
         new_url = (
             domain_url.split("?")[0] 
-            .replace("/x20251113ys", "/siyxaygty")
-            + f"?xsyfew={self.xsyfew}&time={timestamp}&psgn=168&vs=1002"                
+            .replace("/x/r", "/xiaoxinxin/dudu")
+            + f"?rid={self.rid}&time={timestamp}&psgn=168&vs=1002"                
         )
 
         print(new_url)
@@ -275,7 +292,7 @@ class GoldCollector:
     def claim_reward(self, read_time):
         """领取金币奖励"""
         timestamp = int(time.time() * 1000)
-        api_url = f"{self.base_url}/jinbicp?xsyfew={self.xsyfew}&time={read_time}&timestamp={timestamp}"
+        api_url = f"{self.base_url}/xiaoxinxin/jinright?rid={self.rid}&time={read_time}&timestamp={timestamp}"
 
         response = self.session.get(api_url, headers=self.headers)
         if response.status_code == 200:
@@ -342,6 +359,10 @@ class GoldCollector:
         self.get_initial_page()
 
 if __name__ == "__main__":
+    if is_maintenance() == True:
+        print('系统维护中!!!')
+        sys.exit(1)  # 中断程序
+
     def process_account(account):
         print(f"\n=======开始执行{account['name']}=======")
         print(account['name'], account['unionid'])
