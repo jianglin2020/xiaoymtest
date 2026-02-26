@@ -32,7 +32,7 @@ def is_maintenance():
     response = requests.get(url,headers={'User-Agent': random.choice(config['ua_list'])},timeout=20)
 
     """用bool()转换"""
-    return bool(re.search(r'系统维护中，近期价格低', response.text))
+    return bool(re.search(r'平台维护钟，祝各位新年快乐', response.text))
 
 class GoldCollector:
     def __init__(self, account):
@@ -272,10 +272,10 @@ class GoldCollector:
         print(new_url)
         response = self.session.get(new_url, headers=self.headers)
         print(response.json())
-        if response.status_code == 200: 
-            with open('output.json', 'a', encoding='utf-8') as f:
-                json.dump(response.json(), f, ensure_ascii=False, indent=4)
-                f.write('\n')  # 每次追加后换行分隔
+        # if response.status_code == 200: 
+        #     with open('output.json', 'a', encoding='utf-8') as f:
+        #         json.dump(response.json(), f, ensure_ascii=False, indent=4)
+        #         f.write('\n')  # 每次追加后换行分隔
         return response.json()
     
     def simulate_reading(self, article_data):

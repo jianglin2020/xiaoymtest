@@ -26,7 +26,7 @@ qwbotkey = config['qwbotkey']
 duoduo_config = config['duoduo_config']
 check_whitelist = config['check_whitelist']
 check_index = [1, 6, 13] # 第一轮
-check_today_index = [0, 4, 11, 27, 33, 40, 59, 67, 76, 89, 97]
+check_today_index = [0, 4, 10, 16, 27, 32, 39, 58, 66, 75, 88, 96, 105]
 
 class GoldCollector:
     def __init__(self, account={}):
@@ -266,11 +266,11 @@ class GoldCollector:
 
 
             # 写入JSON文件（追加模式）
-            with open('output.json', 'a', encoding='utf-8') as f:
-                # 将JSON数据写入文件，禁用ASCII转码，使用4空格缩进
-                f.write(f"\n===== {self.account['name']} 第{i}次请求 已阅读{num} 时间: {time.strftime('%Y-%m-%d %H:%M:%S')} 金币: {last_balance} => {self.balance} =====\n")
-                json.dump(result, f, ensure_ascii=False, indent=4)
-                f.write('\n')  # 每次追加后换行分隔不同记录
+            # with open('output.json', 'a', encoding='utf-8') as f:
+            #     # 将JSON数据写入文件，禁用ASCII转码，使用4空格缩进
+            #     f.write(f"\n===== {self.account['name']} 第{i}次请求 已阅读{num} 时间: {time.strftime('%Y-%m-%d %H:%M:%S')} 金币: {last_balance} => {self.balance} =====\n")
+            #     json.dump(result, f, ensure_ascii=False, indent=4)
+            #     f.write('\n')  # 每次追加后换行分隔不同记录
             # 检查业务逻辑是否失败（假设result是业务结果对象）
             if result.get('code') != 0:
                 print(f"🔚 {result}")

@@ -200,10 +200,10 @@ class GoldCollector:
 
         response = self.session.post(url, data=data, headers=headers)
         print(response)
-        if response.status_code == 200: 
-            with open('output.json', 'a', encoding='utf-8') as f:
-                json.dump(response.json(), f, ensure_ascii=False, indent=4)
-                f.write('\n')  # 每次追加后换行分隔
+        # if response.status_code == 200: 
+        #     with open('output.json', 'a', encoding='utf-8') as f:
+        #         json.dump(response.json(), f, ensure_ascii=False, indent=4)
+        #         f.write('\n')  # 每次追加后换行分隔
         return response.json()
     
     def simulate_reading(self, article_data):

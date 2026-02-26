@@ -156,20 +156,23 @@ def select_item(data):
 
 # 主方法        
 def main():
-  getCloudLogin() # 登陆
+  # getCloudLogin() # 登陆
   # getDoubanHot(1) # 电视剧
   # getDoubanHot(2) # 综艺
 
   # 运行选择
   selected_item = select_item([
     {'name': '长安二十四计', 'type': 1},
-    {'name': '老舅', 'type': 1},
     {'name': '奔跑吧', 'type': 2},
-    {'name': '森林进化论', 'type': 2},
-    {'name': '现在就出发', 'type': 2},
-    {'name': '喜人奇妙夜', 'type': 2},
     {'name': '你好星期六', 'type': 2},
-    {'name': '声生不息', 'type': 2}
+    {'name': '声生不息', 'type': 2},
+    {'name': '主咖和Ta的朋友们', 'type': 2},
+    {'name': '大侦探 第十一季', 'type': 2},
+    {'name': '剑来', 'type': 2},
+    {'name': '纯真年代的爱情', 'type': 2},
+    {'name': '好好的时光', 'type': 2},
+    {'name': '江湖夜雨十年灯', 'type': 2},
+    {'name': '除恶', 'type': 2}
   ])
 
   print("你选择了:", selected_item)
