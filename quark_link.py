@@ -66,14 +66,41 @@ def merge_duplicate_links(data):
         'source': ' / '.join(sorted(item['sources']))
     } for item in merged.values()]
 
+# 获取站点
+def quark_site():
+  url = 'https://pan-site-monitor.vercel.app/api/data'
+  headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+    'Referer': 'https://pan-site-monitor.vercel.app/',
+    "Cache-Control": "no-cache",  # 强制要求服务器不使用缓存
+    "Pragma": "no-cache", # 兼容 HTTP/1.0
+}
+  response = requests.get(url, headers=headers, timeout=15)
+  res = response.json()
+
+  result = []
+  for site_key, site_info in res.get('sites', []).items():
+    item = {
+      'name': site_key,
+      'url': site_info.get('best_url'),
+    }
+    print(f'{item},')
+    result.append(item)
+  return result      
+
 def quark_link(name):
     SEARCH_KEYWORD = name
     TARGET_SITES = [
-        {'name': '玩偶', 'url': 'https://wogg.xxooo.cf'},
-        {'name': '至臻', 'url': 'https://xiaomi666.fun'},
-        {'name': '蜡笔', 'url': 'https://feimao666.fun'},
-        # {'name': '虎斑', 'url': 'http://103.45.162.207:20720'},
-        # {'name': '二小', 'url': 'http://erxiaofn.click'}
+        {'name': '玩偶', 'url': 'https://wogg.xxooo.cf'},     
+        {'name': '木偶', 'url': 'https://666.666291.xyz'},    
+        {'name': '蜡笔', 'url': 'http://fmao.shop'},
+        {'name': '闪电', 'url': 'https://sd.sduc.site'},      
+        {'name': '至臻', 'url': 'http://www.miqk.cc'},        
+        {'name': '多多', 'url': 'https://tv.yydsys.top'},     
+        {'name': '欧哥', 'url': 'https://woog.nxog.eu.org'},  
+        {'name': '二小', 'url': 'https://erxiaofn.site'},     
+        {'name': '虎斑', 'url': 'http://154.222.27.33:20720'},
+        {'name': '小斑', 'url': 'http://154.201.83.50:12512'},
     ]
 
     # 1. 抓取数据
@@ -124,4 +151,4 @@ def quark_link(name):
     return final_data
 
 if __name__ == '__main__':
-    quark_link('你好星期六')
+    quark_site()

@@ -26,7 +26,8 @@ qwbotkey = config['qwbotkey']
 duoduo_config = config['duoduo_config']
 check_whitelist = config['check_whitelist']
 check_index = [1, 6, 13] # 第一轮
-check_today_index = [0, 4, 10, 16, 27, 32, 39, 58, 66, 75, 88, 96, 105]
+# check_today_index = [0, 4, 10, 16, 28, 32, 37, 58, 66, 75, 88, 96, 105]
+check_today_index = [0, 5, 12, 15, 16, 19, 22, 28, 32, 37, 58, 66, 75, 88, 96, 105]
 
 class GoldCollector:
     def __init__(self, account={}):
@@ -260,11 +261,17 @@ class GoldCollector:
             last_balance = self.balance #上次的金币
             self.balance = self.get_balance() #本次的金币
 
-            if (self.balance - last_balance) == 0 and self.last_num and not self.last_num in check_today_index:
-                check_today_index.append(self.last_num)
-                print(check_today_index)
-
-
+            diff = self.balance - last_balance
+            if self.last_num:
+                if diff == 0 and self.last_num not in check_today_index:
+                    check_today_index.append(self.last_num)
+                    check_today_index.sort() # 排序
+                    print(check_today_index, f'添加 {self.last_num}')
+                elif diff >= 50 and self.last_num in check_today_index:
+                    check_today_index.remove(self.last_num)
+                    print(check_today_index, f'删除 {self.last_num}')
+                else:
+                    print(check_today_index)
             # 写入JSON文件（追加模式）
             # with open('output.json', 'a', encoding='utf-8') as f:
             #     # 将JSON数据写入文件，禁用ASCII转码，使用4空格缩进
