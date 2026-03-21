@@ -162,18 +162,17 @@ def main():
 
   # 运行选择
   selected_item = select_item([
+    {'name': '剑来', 'type': 2},
+    {'name': '纯真年代的爱情', 'type': 2},
+    {'name': '好好的时光', 'type': 2},
+    {'name': '江湖夜雨十年灯', 'type': 2},
+    {'name': '玫瑰丛生', 'type': 2},
+    {'name': '逐玉', 'type': 2},
     {'name': '你好星期六', 'type': 2},
     {'name': '声生不息', 'type': 2},
     {'name': '主咖和Ta的朋友们', 'type': 2},
     {'name': '大侦探 第十一季', 'type': 2},
     {'name': '亲爱的客栈2026', 'type': 2},
-    {'name': '剑来', 'type': 2},
-    {'name': '岁月有情时', 'type': 2},
-    {'name': '纯真年代的爱情', 'type': 2},
-    {'name': '好好的时光', 'type': 2},
-    {'name': '江湖夜雨十年灯', 'type': 2},
-    {'name': '玫瑰丛生', 'type': 2},
-    {'name': '除恶', 'type': 2}
   ])
 
   print("你选择了:", selected_item)

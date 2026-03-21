@@ -395,11 +395,9 @@ class TianyiDownloader:
 
 if __name__ == "__main__":
     # 在这里直接输入分享链接
-    # 查看大生意人29、30集字幕
     share_list = [
-      {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-      {'name': '大生意人', 'url': 'https://cloud.189.cn/web/share?code=AnUNF3V3m6nu'},
-      {'name': '狙击蝴蝶', 'url': 'https://cloud.189.cn/web/share?code=fM7RBjQ7JrIb'},
+    #   {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
+      {'name': '逐玉', 'url': 'https://cloud.189.cn/web/share?code=aMZRjeVNfii2'},
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')
@@ -410,7 +408,7 @@ if __name__ == "__main__":
         for share_item in share_list:
             print(share_item)
             # 指定保存目录（默认为当前目录下的downloads文件夹）
-            save_dir = f"Z:\download\下载\{share_item['name']}"
+            save_dir = f"H:\安装包\下载\{share_item['name']}"
             downloader.download_share_file(share_item, save_dir)
         print('下载完成！')
         rename_files() # 重命名

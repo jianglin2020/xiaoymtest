@@ -91,14 +91,14 @@ def quark_site():
 def quark_link(name):
     SEARCH_KEYWORD = name
     TARGET_SITES = [
-        {'name': '玩偶', 'url': 'https://wogg.xxooo.cf'},     
+        {'name': '玩偶', 'url': 'https://wogg.xxooo.cf'},
         {'name': '木偶', 'url': 'https://666.666291.xyz'},    
         {'name': '蜡笔', 'url': 'http://fmao.shop'},
         {'name': '闪电', 'url': 'https://sd.sduc.site'},      
-        {'name': '至臻', 'url': 'http://www.miqk.cc'},        
-        {'name': '多多', 'url': 'https://tv.yydsys.top'},     
+        {'name': '至臻', 'url': 'https://mihdr.top'},
+        {'name': '多多', 'url': 'https://tv.214521.xyz'},     
         {'name': '欧哥', 'url': 'https://woog.nxog.eu.org'},  
-        {'name': '二小', 'url': 'https://erxiaofn.site'},     
+        {'name': '二小', 'url': 'https://www.wexwp.cc'},      
         {'name': '虎斑', 'url': 'http://154.222.27.33:20720'},
         {'name': '小斑', 'url': 'http://154.201.83.50:12512'},
     ]
