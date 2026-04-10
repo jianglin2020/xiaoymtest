@@ -381,12 +381,12 @@ class TianyiDownloader:
                 else:
                     print(f"⚠️ 文件已存在但大小不匹配 本地: {self._format_size(local_size)} vs 云端: {self._format_size(fileListItem['size'])}")
                     print(f"↓ 开始重新下载: {fileListItem['name']}")
-                    self.download_file(download_url, save_path)
+                    # self.download_file(download_url, save_path)
                     print(f"✓ 文件已保存到: {save_path}")
             else:
                 # 添加历史记录
                 print(f"↓ 开始下载: {fileListItem['name']} (大小: {self._format_size(fileListItem['size'])})")
-                self.download_file(download_url, save_path)
+                # self.download_file(download_url, save_path)
                 print(f"✓ 文件已保存到: {save_path}")
 
             # 添加历史记录
@@ -397,7 +397,8 @@ if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
     #   {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-      {'name': '逐玉', 'url': 'https://cloud.189.cn/web/share?code=aMZRjeVNfii2'},
+    #   {'name': '逐玉', 'url': 'https://cloud.189.cn/web/share?code=rUBNRf6Z7naq'},
+      {'name': '冬去春来', 'url': 'https://cloud.189.cn/web/share?code=FbeYJvryqeqa'},
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')

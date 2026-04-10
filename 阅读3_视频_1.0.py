@@ -64,34 +64,38 @@ class GoldCollector:
             self.request_id = request_id_match.group(1)
     
     # 获取 domain_url
-    def get_domain_url(self):
+    def get_domain_url(self, max_retries = 10):
 
         url = f"{self.base_url}/h5_share/GetTask/get_video_play"
 
-        try:
-            response = self.session.post(
-                url,
-                headers=self.headers,
-                data={},
-                timeout=20
-            )
-            response.raise_for_status()
-            result = response.json()
+        for attempt in range(max_retries):
+            try:
+                response = self.session.post(
+                    url,
+                    headers=self.headers,
+                    data={},
+                    timeout=20
+                )
+                response.raise_for_status()
+                result = response.json()
 
-            print(result)
+                print(result)
 
-            if result.get('code') == 200:
-                data = result.get('data', {})
-                url = re.search(r'http[^\s<>"]+', data['copyContent']).group(0)
-                print(f"🚗 domain地址：{url}")
-                return url
-            else:
-                print(f"获取失败: {result.get('message', '未知错误')}")
-                return None
+                if result.get('code') == 200:
+                    data = result.get('data', {})
+                    url = re.search(r'http[^\s<>"]+', data['copyContent']).group(0)
+                    print(f"🚗 domain地址：{url}")
+                    return url
+                else:
+                    print(f"获取失败: {result.get('message', '未知错误')}")
                     
-        except requests.exceptions.RequestException as e:
-            print(f"请求异常: {str(e)}")
-            return None
+            except requests.exceptions.RequestException as e:
+                print(f"请求异常: {str(e)}")
+        
+            # 如果不是最后一次尝试，等待后重试
+            if attempt < max_retries - 1:
+                print(f"重试第 {attempt + 2} 次...")
+                time.sleep(5)
 
     def get_sign_info(self):
         """获取初始页面并解析关键参数"""

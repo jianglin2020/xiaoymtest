@@ -32,7 +32,7 @@ def is_maintenance():
     response = requests.get(url,headers={'User-Agent': random.choice(config['ua_list'])},timeout=20)
 
     """用bool()转换"""
-    return bool(re.search(r'平台维护钟，祝各位新年快乐', response.text))
+    return bool(re.search(r'价格太低，暂时维护，再等等', response.text))
 
 class GoldCollector:
     def __init__(self, account):
@@ -315,9 +315,9 @@ class GoldCollector:
             }
             headers = {'Content-Type': 'application/json'}
             response = requests.post(url, headers=headers, data=json.dumps(data))
-            print("以将该文章推送至微信请在20s内点击链接完成阅读--20s后继续运行")
+            print("以将该文章推送至微信请在15s内点击链接完成阅读--15s后继续运行")
             # 使用示例
-            self.sleep_with_countdown(20)
+            self.sleep_with_countdown(15)
 
     
     def run(self):
@@ -332,7 +332,7 @@ class GoldCollector:
         domain_url = self.get_domain_url()
 
         # 执行任务
-        for i in range(30):
+        for i in range(35):
             print(f"------{self.account['name']}_正在第{i+1}次阅读------")
             # 请求文章
             article_data = self.request_article(domain_url)
@@ -373,7 +373,7 @@ if __name__ == "__main__":
     with ThreadPoolExecutor(max_workers=4) as executor:
         for account in xyy_config['xyyck']:
             executor.submit(process_account, account)
-            time.sleep(40)  # 线程间隔40秒
+            time.sleep(30)  # 线程间隔30秒
     
     # 遍历所有账号
     # for account in xyy_config['xyyck']:

@@ -66,7 +66,7 @@ class GoldCollector:
     # 获取 domain_url
     def get_domain_url(self):
 
-        url = f"{self.base_url}/h5_share/daily/get_read"
+        url = f"{self.base_url}/h5_share/GetTask/get_read"
 
         try:
             response = self.session.post(
