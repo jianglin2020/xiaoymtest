@@ -162,7 +162,7 @@ def main():
 
   # 运行选择
   selected_item = select_item([
-    {'name': '阿凡达', 'type': 2},
+    {'name': '家事法庭', 'type': 2},
     {'name': '剑来', 'type': 2},
     {'name': '你好星期六', 'type': 2},
     {'name': '声生不息', 'type': 2},

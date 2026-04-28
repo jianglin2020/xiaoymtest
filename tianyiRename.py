@@ -3,7 +3,7 @@ import re
 
 def rename_files():
   # 设置要处理的目录路径
-  path = r'Z:\download\下载'
+  path = r'H:\安装包\下载'
   for dirpath, dirnames, filenames in os.walk(path):
       for filename in filenames:
           # 使用正则表达式匹配集数部分

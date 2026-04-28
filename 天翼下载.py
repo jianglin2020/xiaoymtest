@@ -2,6 +2,7 @@ import requests
 import os
 import time
 import json
+import base64
 from urllib.parse import urlparse, parse_qs
 from dotenv import load_dotenv
 from tianyiLogin import TianyiCloudLogin
@@ -163,13 +164,15 @@ class TianyiDownloader:
 
     def get_download_url(self, file_info):
         """获取文件下载链接"""
-        url = f"{self.base_url}/api/portal/getNewVlcVideoPlayUrl.action"
+        # url = f"{self.base_url}/api/portal/getNewVlcVideoPlayUrl.action"
+        url = f"{self.base_url}/api/open/file/getFileDownloadUrl.action"
+
         params = {
             'noCache': int(time.time() * 1000),
             'shareId': file_info['shareId'],
             'dt': 1,
             'fileId': file_info['fileId'],
-            'type': 4
+            # 'type': 4
         }
 
         response = self.session.get(url, params=params)
@@ -186,7 +189,8 @@ class TianyiDownloader:
         if data['res_code'] != 0:
             raise ValueError(f"获取下载链接失败: {data.get('res_message', '未知错误')}")
             
-        return data['normal']['url']
+        # return data['normal']['url']
+        return data['fileDownloadUrl']
     
     def download_file(self, download_url, save_path, max_retries=3, retry_delay=5):
         """
@@ -220,15 +224,15 @@ class TianyiDownloader:
             try:
                 # 设置断点续传请求头
                 headers = {}
-                if file_size > 0:
-                    headers['Range'] = f'bytes={file_size}-'
-                    print(f"检测到已下载 {file_size} 字节，开始断点续传...")
+                # if file_size > 0:
+                #     headers['Range'] = f'bytes={file_size}-'
+                #     print(f"检测到已下载 {file_size} 字节，开始断点续传...")
                 
                 # 设置超时和重试
                 response = self.session.get(
                     download_url, 
                     headers=headers, 
-                    stream=True,
+                    # stream=True,
                     timeout=30  # 添加超时设置
                 )
 
@@ -269,7 +273,16 @@ class TianyiDownloader:
                             
                             # 打印进度+速度
                             self._print_progress(downloaded, actual_total_size, speed)
-                
+                # 解码保存
+                with open(save_path, 'r', encoding='utf-8') as f:
+                    encoded_data = f.read().strip()
+                decoded = base64.b64decode(encoded_data)
+
+                print(f'\n{decoded}') 
+
+                # with open('output.json', 'ab') as f:
+                #     f.write(decoded + b'\n')
+
                 # 如果执行到这里，说明下载成功
                 break
                 
@@ -357,7 +370,7 @@ class TianyiDownloader:
         # 获取文件列表
         self.get_fileList(fileListAO, share_info)
     
-        # 排序后下载
+        # # 排序后下载
         for fileListItem in self.sort_file_list(self.fileList):
             if self._is_downloaded(fileListItem['id'], fileListItem['name']):
                 # print(f"✓ 历史文件已下载过，跳过: {fileListItem['name']}")
@@ -381,12 +394,12 @@ class TianyiDownloader:
                 else:
                     print(f"⚠️ 文件已存在但大小不匹配 本地: {self._format_size(local_size)} vs 云端: {self._format_size(fileListItem['size'])}")
                     print(f"↓ 开始重新下载: {fileListItem['name']}")
-                    # self.download_file(download_url, save_path)
+                    self.download_file(download_url, save_path)
                     print(f"✓ 文件已保存到: {save_path}")
             else:
                 # 添加历史记录
                 print(f"↓ 开始下载: {fileListItem['name']} (大小: {self._format_size(fileListItem['size'])})")
-                # self.download_file(download_url, save_path)
+                self.download_file(download_url, save_path)
                 print(f"✓ 文件已保存到: {save_path}")
 
             # 添加历史记录
@@ -397,8 +410,8 @@ if __name__ == "__main__":
     # 在这里直接输入分享链接
     share_list = [
     #   {'name': '凡人修仙传(2020)', 'url': 'https://cloud.189.cn/web/share?code=fMraqaqiEJji'},
-    #   {'name': '逐玉', 'url': 'https://cloud.189.cn/web/share?code=rUBNRf6Z7naq'},
-      {'name': '冬去春来', 'url': 'https://cloud.189.cn/web/share?code=FbeYJvryqeqa'},
+      {'name': '方圆八百米', 'url': 'https://cloud.189.cn/web/share?code=JFz2Ijz2yYby'},
+      {'name': '月鳞绮纪', 'url': 'https://cloud.189.cn/web/share?code=mUB7fyQBbIfa'},
     ]
 
     tianyiCookie = os.getenv('TIANYI_COOKIE')
